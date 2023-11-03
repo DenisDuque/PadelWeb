@@ -47,7 +47,7 @@ if($_POST) {
     </head>
     <body>
             <div id="loginDiv">
-                <img src="src/loginLogo.svg" alt="Padel Logo" class="logo"/>
+                <img src="src/logo.svg" alt="Padel Logo" class="logo"/>
                 <form action="login.php" method="post" enctype="multipart/form-data" name="login">
                     <div>
                         <div class='imageContainer'><img src="src/email.png" alt="Email:"/></div>
