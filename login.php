@@ -34,16 +34,13 @@ if($_POST) {
 
     $connect->close();
 }
-    
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <title>Log In</title>
-        <link rel="stylesheet" href="css/main.css">    
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="icon" type="image/x-icon" href="src/logo.svg">
     </head>
     <body>
             <div id="loginDiv">
