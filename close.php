@@ -2,5 +2,5 @@
     session_start();
     session_unset();
     session_destroy();
-    header('Location: login.php');
+    echo '<meta http-equiv="refresh" content="0;url=login.php">';
 ?>
