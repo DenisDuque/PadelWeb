@@ -17,4 +17,13 @@ function connectDataBase() {
 
     return $connect;
 }
+
+function getBookingsByMonth($month) {
+    $sql = "SELECT * FROM booking WHERE day LIKE '*-".$month."-*' AND email = '".$_SESSION['userEmail']."' AND status LIKE '*PAID'";
+    $connect = connectDataBase();
+
+    $result = mysqli_query($connect, $sql);
+
+    return $result;
+}
 ?>
