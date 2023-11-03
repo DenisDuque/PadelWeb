@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#loginDiv {
+  background-color: #003840;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#loginDiv img.logo {
+  margin-top: 10vh;
+  width: 70vw;
+  aspect-ratio: 1/1;
+}
+#loginDiv form {
+  margin-top: 5vh;
+}
+#loginDiv form div {
+  display: flex;
+}
+#loginDiv form div div.imageContainer {
+  height: 4vh;
+  width: 4vh;
+  padding: 1vh;
+  background-color: white;
+  border-radius: 100%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  margin: 2.2vh;
+}
+#loginDiv form div div.imageContainer img {
+  aspect-ratio: 1/1;
+  height: 3vh;
+}
+#loginDiv .loginInput {
+  margin: 2vh;
+  border-radius: 3vh;
+  border: 0.1em solid #005A5B;
+  background-color: #00444E;
+  display: block;
+  width: 60vw;
+  height: 6vh;
+  font: "Inter", sans-serif;
+  font-size: 2vh;
+  color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+#loginDiv .errorLogin {
+  margin: 2vh;
+  font: "Inter", sans-serif;
+  font-size: 2vh;
+  color: #FF3333;
+  display: block;
+  text-align: center;
+  width: 60vw;
+}
+#loginDiv #loginButton {
+  margin: 2vh;
+  margin-top: 10vh;
+  font: "Inter", sans-serif;
+  font-weight: bold;
+  color: #005A5B;
+  border-radius: 3vh;
+  display: block;
+  width: 60vw;
+  height: 6vh;
+  font-size: 2vh;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}/*# sourceMappingURL=main.css.map */
