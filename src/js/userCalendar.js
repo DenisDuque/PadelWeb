@@ -189,7 +189,7 @@ function openCancelBooking(id){
     confirmButton.innerText = "Confirm";
 
     confirmButton.addEventListener("click", function(){
-        location.href("user.php?cancelId="+id);
+        location.href = "user.php?cancelId="+id;
     })
 
     cancelDiv.appendChild(confirmButton);
