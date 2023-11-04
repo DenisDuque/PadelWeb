@@ -89,6 +89,7 @@ function setupCalendar(){
 function addEvents() {
     let prevButton = document.getElementById("prv");
     let nextButton = document.getElementById("nxt");
+    let expandButton = document.getElementById("expandBookings");
 
     prevButton.addEventListener("click", function() {
         if (currentMonth == 0) {
@@ -109,4 +110,12 @@ function addEvents() {
         }
         setupCalendar();
     })
+
+    expandButton.addEventListener("click", function() {
+        let bookingContainer = document.getElementById("bookingContainer");
+
+        bookingContainer.style.maxHeight = "none";
+
+        expandButton.remove();
+    });
 }

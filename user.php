@@ -12,18 +12,27 @@
     <script src="src/js/userCalendar.js"></script>
 </head>
 <body>
+    <?php
+        include("functions.php");
+    ?>
     <header>
         <img class="leftTopLogo" src="src/img/logo.svg" alt="Padel Logo">
         <h1>Calendar of Bookings</h1>
         <a href='close.php'><img class="logout" src="src/img/logout.png" alt="Logout"></a>
     </header>
-
+    <?php
+        if(!isset($_SESSION['userEmail'])){
+            session_unset();
+            session_destroy();
+            echo '<meta http-equiv="refresh" content="0;url=login.php">';
+        } else {
+    ?>
     <main>
         <div class="datePicker">
             <button class="changeMonth" id="prv"><img id="lastMonth" src="src/img/arrow.png" alt="Last Month"></button>
-            <h2 id="month">January</h2>
+            <h2 id="month"></h2>
             <button class="changeMonth" id="nxt"><img id="nextMonth" src="src/img/arrow.png" alt="Next Month"></button>
-            <h3 id="year">2023</h3>
+            <h3 id="year"></h3>
         </div>
 
         <div class="calendarContainer">
@@ -41,10 +50,32 @@
         </div>
         <div class="yourBookings">
             <h2>Your bookings</h2>
+            <?php
+                $connect = connectDataBase();
+                $sql = "SELECT * FROM booking WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE()";
+                if(selectSQL($connect, $sql, $result)){
+                }
+            ?>
+            <div id="bookingContainer">
+                <?php
+                    foreach ($result as $booking) {
+                        createBookingDiv($booking);
+                        createBookingDiv($booking);
+                        createBookingDiv($booking);
+                        createBookingDiv($booking);
+                        createBookingDiv($booking);
+                        createBookingDiv($booking);
 
-
+                    }
+                ?>
+            </div>
+            <button id="expandBookings">
+                <img src="src/img/arrow.png" alt="expand bookings">
+            </button>
         </div>
     </main>
-    
+    <?php
+        }
+    ?>
 </body>
 </html>

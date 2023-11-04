@@ -57,4 +57,55 @@ function getBookingsByMonth($month) {
 
     return $result;
 }
+
+function getBookingsByUser() {
+    $sql = "SELECT *
+    FROM booking
+    WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE()";
+
+    $connect = connectDataBase();
+
+    $result = mysqli_query($connect, $sql);
+
+    return $result;
+}
+
+function selectSQL($connection, $sql, &$result) {
+    $resultOk = false;
+
+    try {
+        $consulta = mysqli_query($connection, $sql);
+        if ($consulta) {
+            $resultOk = true;
+            
+            $result = mysqli_fetch_all($consulta, MYSQLI_ASSOC);
+        }
+        else throw new Exception(mysqli_sql_exception());
+    } catch (Exception $e) {    
+        echo "<p>Error en la consulta SQL</p>";
+        errorMsg($e);
+    }
+
+    return $resultOk;
+}
+
+function createBookingDiv($booking) {
+    $day = $booking['day'];
+    $hour = $booking['hour'];
+    $courtId = $booking['courtId'];
+    $id = "booking" . $booking['bookingId'];
+    $currDate = new DateTime($day);
+    $dayName = $currDate->format('l');
+    $dayNum = ltrim($currDate->format('d'), '0');
+    $monthName = $currDate->format('F');
+
+    $hourFormatted = preg_replace('/^0/', '', $hour);
+    echo "<div class='booking'>";
+    echo "<p><strong>$dayName $dayNum</strong></p>";
+    echo "<p><strong>$monthName</strong></p>";
+    echo "<p>At $hourFormatted</p>";
+    echo "<p>Court $courtId</p>";
+    echo "<button id='$id'>Cancel</button>";
+    echo "</div>";
+}
 ?>
