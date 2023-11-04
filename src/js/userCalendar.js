@@ -68,6 +68,10 @@ function setupCalendar(){
         dayNumber.innerHTML = i+1;
         
         dayDiv.appendChild(dayNumber);
+
+        dayDiv.addEventListener("click", function() {
+            console.log(currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
+        });
         calendar.appendChild(dayDiv);
 
         daysIterated++;

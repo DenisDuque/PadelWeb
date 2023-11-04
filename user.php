@@ -13,16 +13,16 @@
 </head>
 <body>
     <header>
-        <img class="leftTopLogo" src="src/img/logo.svg" alt="Padel Logo"/>
+        <img class="leftTopLogo" src="src/img/logo.svg" alt="Padel Logo">
         <h1>Calendar of Bookings</h1>
-        <a href='close.php'><img class="logout" src="src/img/logout.png" alt="Logout"/></a>
+        <a href='close.php'><img class="logout" src="src/img/logout.png" alt="Logout"></a>
     </header>
 
     <main>
         <div class="datePicker">
-            <button class="changeMonth" id="prv"><img id="lastMonth" src="src/img/arrow.png" alt="Last Month"/></button>
+            <button class="changeMonth" id="prv"><img id="lastMonth" src="src/img/arrow.png" alt="Last Month"></button>
             <h2 id="month">January</h2>
-            <button class="changeMonth" id="nxt"><img id="nextMonth" src="src/img/arrow.png" alt="Next Month"/></button>
+            <button class="changeMonth" id="nxt"><img id="nextMonth" src="src/img/arrow.png" alt="Next Month"></button>
             <h3 id="year">2023</h3>
         </div>
 
