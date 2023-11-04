@@ -25,7 +25,9 @@
         if(!isset($_SESSION['userEmail'])){
             session_unset();
             session_destroy();
-            echo '<meta http-equiv="refresh" content="0;url=login.php">';
+            echo '<meta http-equiv="refresh" content="0;url=index.php">';
+        } else if(connectDataBase()==false){
+            echo "<h1 style='color: white; margin-top: 1rem;'>Database down</h1>";
         } else {
     ?>
     <main>
@@ -66,7 +68,6 @@
                     } else {
                         foreach ($result as $booking) {   
                             createBookingDiv($booking);
-                            createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);
                         }
                     }
                 ?>

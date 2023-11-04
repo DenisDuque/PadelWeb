@@ -22,7 +22,14 @@
     ?>
     <div id="loginDiv">
         <img src="src/img/logo.svg" alt="Padel Logo" class="logo"/>
-        <form action="login.php" method="post" enctype="multipart/form-data" name="login" autocomplete="off">
+        <?php
+            if(connectDataBase()==false){
+                echo "<h1 style='color: white; margin-top: 1rem;'>Database down</h1>";
+            } else {
+
+            
+        ?>
+        <form action="index.php" method="post" enctype="multipart/form-data" name="login" autocomplete="off">
             <div>
                 <div class='imageContainer'><img src="src/img/email.png" alt="Email:"/></div>
                 <input type="email" class="loginInput" name="userEmail" id="userEmail" placeholder="Email Address">
@@ -34,6 +41,9 @@
             <p class="errorLogin"><?php echo $incorrectCredentials; ?></p>
             <input type="submit" id="loginButton" value="LOGIN">
         </form>
+        <?php
+            }
+        ?>
     </div>
 </body>
 </html>

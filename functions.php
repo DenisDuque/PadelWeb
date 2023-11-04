@@ -9,10 +9,15 @@ function connectDataBase() {
     $dbUsername = 'root';
     $dbPass = '';
 
-    $connect = mysqli_connect($host, $dbUsername, $dbPass, $dbName);
+    try {
+        $connect = mysqli_connect($host, $dbUsername, $dbPass, $dbName);
+    } catch (Exception $e){
+        $connect = false;
+    }
 
     if($connect == false){
-        echo mysqli_connect_error();
+        
+        return false;
     }
 
     return $connect;
