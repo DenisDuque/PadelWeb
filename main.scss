@@ -170,7 +170,7 @@ main{
         border-radius: 2vh;
         display: grid;
         place-items: center;
-        .calendar{
+        #calendar{
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(7, 1fr);

@@ -27,7 +27,7 @@
         </div>
 
         <div class="calendarContainer">
-            <div class="calendar">
+            <div id="calendar">
                 <?php
                     $days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
                     for ($i=0; $i < 7; $i++) { 
@@ -35,11 +35,7 @@
                         echo "  <p>{$days[$i]}</p>";
                         echo "</div>";
                     }
-                    for ($i=0; $i < 42; $i++) { 
-                        echo "<div class='day'>";
-                        echo "  <p>X</p>";
-                        echo "</div>";
-                    }
+                    
                 ?>
             </div>
         </div>

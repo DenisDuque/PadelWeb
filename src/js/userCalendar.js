@@ -19,7 +19,7 @@ let monthsName = [
     "October",
     "November",
     "December"
-  ];
+];
 
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
@@ -31,6 +31,55 @@ function setupCalendar(){
 
     currentMonthLabel.innerHTML = monthsName[currentMonth];
     currentYearLabel.innerHTML = currentYear;
+
+    let date = new Date(currentYear, currentMonth, 1)
+    let startDay = date.getDay();
+    if(startDay == 0) {
+        startDay = 6
+    } else {
+        startDay -= 1;
+    }
+
+    let daysIterated = 0;
+
+    let calendar = document.getElementById("calendar");
+
+    const daysToRemove = calendar.querySelectorAll(".day");
+
+    daysToRemove.forEach(function(day) {
+        day.remove();
+    });
+
+    for (let i = 0; i < startDay; i++) {
+        let emptyDiv = document.createElement("div");
+        calendar.appendChild(emptyDiv);
+        emptyDiv.classList.add("day");
+
+        daysIterated++;
+    }
+
+    let numOfDays = new Date(currentYear, currentMonth+1, 0, 0).getDate();
+    
+    for (let i = 0; i < numOfDays; i++) {
+        let dayDiv = document.createElement("div");
+        dayDiv.classList.add("day");
+        
+        let dayNumber = document.createElement("p");
+        dayNumber.innerHTML = i+1;
+        
+        dayDiv.appendChild(dayNumber);
+        calendar.appendChild(dayDiv);
+
+        daysIterated++;
+    }
+
+    while (daysIterated < 42) {
+        let emptyDiv = document.createElement("div");
+        calendar.appendChild(emptyDiv);
+        emptyDiv.classList.add("day");
+
+        daysIterated++;
+    }
 }
 
 function addEvents() {
@@ -44,7 +93,7 @@ function addEvents() {
         } else {
             currentMonth-=1;
         }
-        refreshCalendar();
+        setupCalendar();
     });
 
     nextButton.addEventListener("click", function() {
@@ -54,14 +103,6 @@ function addEvents() {
         } else {
             currentMonth+=1;
         }
-        refreshCalendar();
+        setupCalendar();
     })
-}
-
-function refreshCalendar() {
-    let currentMonthLabel = document.getElementById("month");
-    let currentYearLabel = document.getElementById("year");
-
-    currentMonthLabel.innerHTML = monthsName[currentMonth];
-    currentYearLabel.innerHTML = currentYear;
 }
