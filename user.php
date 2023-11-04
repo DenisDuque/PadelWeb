@@ -8,20 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Padel booking</title>
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/x-icon" href="src/logo.svg">
+    <link rel="icon" type="image/x-icon" href="src/img/logo.svg">
+    <script src="src/js/userCalendar.js"></script>
 </head>
 <body>
     <header>
-        <img class="leftTopLogo" src="src/logo.svg" alt="Padel Logo"/>
+        <img class="leftTopLogo" src="src/img/logo.svg" alt="Padel Logo"/>
         <h1>Calendar of Bookings</h1>
-        <a href='close.php'><img class="logout" src="src/logout.png" alt="Logout"/></a>
+        <a href='close.php'><img class="logout" src="src/img/logout.png" alt="Logout"/></a>
     </header>
 
     <main>
         <div class="datePicker">
-            <button class="changeMonth"><img id="lastMonth" src="src/arrow.png" alt="Last Month"/></button>
+            <button class="changeMonth" id="prv"><img id="lastMonth" src="src/img/arrow.png" alt="Last Month"/></button>
             <h2 id="month">January</h2>
-            <button class="changeMonth"><img id="nextMonth" src="src/arrow.png" alt="Next Month"/></button>
+            <button class="changeMonth" id="nxt"><img id="nextMonth" src="src/img/arrow.png" alt="Next Month"/></button>
             <h3 id="year">2023</h3>
         </div>
 
