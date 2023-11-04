@@ -93,7 +93,7 @@ function createBookingDiv($booking) {
     $day = $booking['day'];
     $hour = $booking['hour'];
     $courtId = $booking['courtId'];
-    $id = "booking" . $booking['bookingId'];
+    $id = $booking['bookingId'];
     $currDate = new DateTime($day);
     $dayName = $currDate->format('l');
     $dayNum = ltrim($currDate->format('d'), '0');
@@ -105,7 +105,7 @@ function createBookingDiv($booking) {
     echo "<p><strong>$monthName</strong></p>";
     echo "<p>At $hourFormatted</p>";
     echo "<p>Court $courtId</p>";
-    echo "<button id='$id'>Cancel</button>";
+    echo "<button id='$id' class='cancelButton'>Cancel</button>";
     echo "</div>";
 }
 ?>

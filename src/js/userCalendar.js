@@ -3,7 +3,7 @@ window.onload = allActions;
 function allActions(){
     setupCalendar();
     addEvents();
-    
+    cancelButtons();
 }
 
 let monthsName = [
@@ -118,4 +118,33 @@ function addEvents() {
 
         expandButton.remove();
     });
+}
+
+function cancelButtons(){
+    let buttons = document.getElementsByClassName("cancelButton");
+    for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i]
+        button.addEventListener("click", function(){
+            openCancelBooking(button.id);
+        })
+    }
+        
+}
+
+function openCancelBooking(id){
+    let backgroundDiv = document.getElementById("background");
+    backgroundDiv.classList.add("background");
+
+    backgroundDiv.addEventListener("click", function() {
+        backgroundDiv.classList.remove("background");
+        let child = document.getElementById("cancelDiv")
+        backgroundDiv.removeChild(child);
+    });
+
+    let cancelDiv = document.createElement("div");
+    cancelDiv.id = "cancelDiv";
+    cancelDiv.classList.add("cancelDiv");
+    cancelDiv.innerHTML = "prueba " + id;
+
+    backgroundDiv.appendChild(cancelDiv)
 }

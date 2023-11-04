@@ -15,6 +15,7 @@
     <?php
         include("functions.php");
     ?>
+    <div id="background"></div>
     <header>
         <img class="leftTopLogo" src="src/img/logo.svg" alt="Padel Logo">
         <h1>Calendar of Bookings</h1>
@@ -52,26 +53,30 @@
             <h2>Your bookings</h2>
             <?php
                 $connect = connectDataBase();
-                $sql = "SELECT * FROM booking WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE()";
+                $sql = "SELECT * FROM booking WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE() AND status != 'CANCELLED'";
                 if(selectSQL($connect, $sql, $result)){
                 }
             ?>
             <div id="bookingContainer">
                 <?php
-                    foreach ($result as $booking) {
-                        createBookingDiv($booking);
-                        createBookingDiv($booking);
-                        createBookingDiv($booking);
-                        createBookingDiv($booking);
-                        createBookingDiv($booking);
-                        createBookingDiv($booking);
-
+                    if(empty($result)){
+                        echo "<div class='booking' style='place-items: center;'>";
+                        echo "<p style='grid-column:1/4; grid-row:1/3;'>Hou have no pendent bookings</p>";
+                        echo "</div>";
+                    } else {
+                        foreach ($result as $booking) {   
+                            createBookingDiv($booking);
+                        }
                     }
                 ?>
             </div>
-            <button id="expandBookings">
-                <img src="src/img/arrow.png" alt="expand bookings">
-            </button>
+            <?php
+                if(!empty($result)){
+                    echo "<button id='expandBookings'>
+                            <img src='src/img/arrow.png' alt='expand bookings'>
+                        </button>";
+                }
+            ?>
         </div>
     </main>
     <?php

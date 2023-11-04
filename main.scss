@@ -17,6 +17,20 @@ body{
     background-color: $background;
 }
 
+.background{
+    width: 100vw;
+    height: 100svh;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    .cancelDiv{
+        background-color: white;
+        z-index: 6;
+    }
+}
+
 #loginDiv {
     background-color: $background;
     
