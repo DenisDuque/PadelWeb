@@ -101,10 +101,10 @@ function createBookingDiv($booking) {
 
     $hourFormatted = preg_replace('/^0/', '', $hour);
     echo "<div class='booking'>";
-    echo "<p><strong>$dayName $dayNum</strong></p>";
-    echo "<p><strong>$monthName</strong></p>";
-    echo "<p>At $hourFormatted</p>";
-    echo "<p>Court $courtId</p>";
+    echo "<p class='day'><strong>$dayName $dayNum</strong></p>";
+    echo "<p class='month'><strong>$monthName</strong></p>";
+    echo "<p class='hour'>At $hourFormatted</p>";
+    echo "<p class='court'>Court $courtId</p>";
     echo "<button id='$id' class='cancelButton'>Cancel</button>";
     echo "</div>";
 }

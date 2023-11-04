@@ -66,6 +66,7 @@
                     } else {
                         foreach ($result as $booking) {   
                             createBookingDiv($booking);
+                            createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);
                         }
                     }
                 ?>

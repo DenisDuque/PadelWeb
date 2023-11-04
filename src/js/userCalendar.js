@@ -137,14 +137,64 @@ function openCancelBooking(id){
 
     backgroundDiv.addEventListener("click", function() {
         backgroundDiv.classList.remove("background");
-        let child = document.getElementById("cancelDiv")
-        backgroundDiv.removeChild(child);
+        let popup = document.getElementById("cancelDiv")
+        popup.remove();
     });
 
     let cancelDiv = document.createElement("div");
     cancelDiv.id = "cancelDiv";
-    cancelDiv.classList.add("cancelDiv");
-    cancelDiv.innerHTML = "prueba " + id;
 
-    backgroundDiv.appendChild(cancelDiv)
+    let text = document.createElement("p");
+    text.classList.add("text");
+    text.innerHTML = "Are you sure you want to <br>cancel this booking?";
+    cancelDiv.appendChild(text);
+    
+    let parent = document.getElementById(id).parentElement;
+    let day = document.createElement("p");
+    day.classList.add("day");
+    let days = parent.getElementsByClassName("day");
+    day.innerHTML = days[0].innerHTML;
+    cancelDiv.appendChild(day);
+
+    let month = document.createElement("p");
+    let months = parent.getElementsByClassName("month");
+    month.classList.add("month");
+    month.innerHTML = months[0].innerHTML;
+    cancelDiv.appendChild(month);
+
+    let hour = document.createElement("p");
+    let hours = parent.getElementsByClassName("hour");
+    hour.classList.add("hour");
+    hour.innerHTML = hours[0].innerHTML;
+    cancelDiv.appendChild(hour);
+
+    let court = document.createElement("p");
+    let courts = parent.getElementsByClassName("court");
+    court.classList.add("court");
+    court.innerHTML = courts[0].innerHTML;
+    cancelDiv.appendChild(court);
+
+    let returnButton = document.createElement("button");
+    returnButton.classList.add("returnButton");
+    returnButton.innerText = "Return";
+
+    returnButton.addEventListener("click", function(){
+        backgroundDiv.click();
+    });
+
+    cancelDiv.appendChild(returnButton);
+
+    let confirmButton = document.createElement("button");
+    confirmButton.classList.add("confirmButton");
+    confirmButton.innerText = "Confirm";
+
+    confirmButton.addEventListener("click", function(){
+        location.href("user.php?cancelId="+id);
+    })
+
+    cancelDiv.appendChild(confirmButton);
+
+    let body = document.getElementsByTagName("body");
+
+    body[0].appendChild(cancelDiv)
 }

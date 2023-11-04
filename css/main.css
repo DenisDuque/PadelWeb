@@ -13,6 +13,8 @@ body {
   width: 100vw;
   height: 100svh;
   background-color: #003840;
+  display: flex;
+  flex-direction: column;
 }
 
 .background {
@@ -24,9 +26,80 @@ body {
   display: grid;
   place-items: center;
 }
-.background .cancelDiv {
-  background-color: white;
+
+#cancelDiv {
+  background-color: #007369;
+  color: white;
   z-index: 6;
+  position: absolute;
+  min-width: 70vw;
+  max-width: 70vw;
+  min-height: 31vh;
+  max-height: 31vh;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr 2fr;
+  justify-self: center;
+  align-self: center;
+  top: 22vh;
+  border-radius: 2vh;
+}
+#cancelDiv .text {
+  grid-column: 1/5;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: bolder;
+}
+#cancelDiv .day {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+#cancelDiv .month {
+  grid-column: 3/4;
+  grid-row: 2/3;
+}
+#cancelDiv .hour {
+  grid-column: 2/3;
+  grid-row: 3/4;
+}
+#cancelDiv .court {
+  grid-column: 3/4;
+  grid-row: 3/4;
+}
+#cancelDiv .returnButton {
+  grid-column: 2/3;
+  grid-row: 4/5;
+  border: 0px;
+  border-radius: 0.5rem;
+  min-width: 5rem;
+  max-width: 5rem;
+  min-height: 1rem;
+  max-height: 1rem;
+  padding: 1rem;
+  display: grid;
+  align-content: center;
+  color: white;
+  font-weight: bolder;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #003840;
+}
+#cancelDiv .confirmButton {
+  grid-column: 3/4;
+  grid-row: 4/5;
+  border: 0px;
+  border-radius: 0.5rem;
+  min-width: 5rem;
+  max-width: 5rem;
+  min-height: 1rem;
+  max-height: 1rem;
+  padding: 1rem;
+  display: grid;
+  align-content: center;
+  color: white;
+  font-weight: bolder;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: #770000;
 }
 
 #loginDiv {
@@ -245,12 +318,18 @@ main .yourBookings #bookingContainer .booking button {
   background-color: #770000;
   color: white;
   border-radius: 1vh;
-  padding: 1rem;
   border: 0px;
   place-self: center;
   text-transform: uppercase;
   font-weight: bolder;
   font-size: 0.8rem;
+  max-height: 2rem;
+  min-height: 2rem;
+  max-width: 10rem;
+  max-width: 10rem;
+  padding: 1rem;
+  display: grid;
+  align-content: center;
 }
 main .yourBookings #expandBookings {
   background-color: #003840;

@@ -1,4 +1,5 @@
 @import 'scss/variables.scss';
+@import 'scss/mixins.scss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 
 * {
@@ -15,6 +16,8 @@ body{
     width: 100vw;
     height: 100svh;
     background-color: $background;
+    display: flex;
+    flex-direction: column;
 }
 
 .background{
@@ -25,9 +28,69 @@ body{
     position: absolute;
     display: grid;
     place-items: center;
-    .cancelDiv{
-        background-color: white;
-        z-index: 6;
+}
+
+#cancelDiv{
+    background-color: $calendarDayBackground;
+    color: white;
+    z-index: 6;
+    position: absolute  ;
+    min-width: 70vw;
+    max-width: 70vw;
+    min-height: 31vh;
+    max-height: 31vh;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
+    grid-template-rows: 2fr 1fr 1fr 2fr;
+    justify-self: center;
+    align-self: center;
+    top: 22vh;
+    border-radius: 2vh;
+
+    .text{
+        grid-column: 1/5;
+        font-size: 1rem;
+        text-align: center;
+        font-weight: bolder;
+    }
+
+    .day {
+        grid-column: 2/3;
+        grid-row: 2/3;
+    }
+
+    .month {
+        grid-column: 3/4;
+        grid-row: 2/3;
+    }
+
+    .hour {
+        grid-column: 2/3;
+        grid-row: 3/4;
+    }
+
+    .court {
+        grid-column: 3/4;
+        grid-row: 3/4;
+    }
+
+    .returnButton{
+        grid-column: 2/3;
+        grid-row: 4/5;
+
+        @include popupButton;
+
+        background-color: $background;
+    }
+
+    .confirmButton{
+        grid-column: 3/4;
+        grid-row: 4/5;
+
+        @include popupButton;
+
+        background-color: $errorBoxes;
     }
 }
 
@@ -269,12 +332,18 @@ main{
                     background-color: $errorBoxes;
                     color: white;
                     border-radius: 1vh;
-                    padding: 1rem;
                     border: 0px;
                     place-self: center;
                     text-transform: uppercase;
                     font-weight: bolder;
                     font-size: 0.8rem;
+                    max-height: 2rem;
+                    min-height: 2rem;
+                    max-width: 10rem;
+                    max-width: 10rem;
+                    padding: 1rem;
+                    display: grid;
+                    align-content: center;
                 }
             }
         }
