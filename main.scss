@@ -49,6 +49,10 @@ body{
     top: 22vh;
     border-radius: 2vh;
 
+    strong{
+        font-size: 1.5vh;
+    }
+
     .text{
         grid-column: 1/5;
         font-size: 1rem;

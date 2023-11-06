@@ -46,6 +46,9 @@ body {
   top: 22vh;
   border-radius: 2vh;
 }
+#cancelDiv strong {
+  font-size: 1.5vh;
+}
 #cancelDiv .text {
   grid-column: 1/5;
   font-size: 1rem;
