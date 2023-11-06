@@ -1,49 +1,47 @@
 window.onload = allActions;
 
 function allActions(){
-    setupCalendar();
-    addEvents();
-    cancelButtons();
+    setupCalendar(); // Configura el calendario
+    addEvents();     // Agrega eventos a botones previos y siguientes
+    cancelButtons(); // Agrega eventos a botones de cancelación de reserva
 }
 
+// Arreglo de nombres de meses.
 let monthsName = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
+    "January", "February", "March", "April", "May", "June", "July",
+    "August", "September", "October", "November", "December"
 ];
 
+// Obtiene la fecha actual.
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
 
 function setupCalendar(){
+    // Obtiene elementos de la interfaz de usuario.
     let currentMonthLabel = document.getElementById("month");
     let currentYearLabel = document.getElementById("year");
 
+    // Muestra el mes y año actual en la interfaz.
     currentMonthLabel.innerHTML = monthsName[currentMonth];
     currentYearLabel.innerHTML = currentYear;
+
 
     var data = new FormData();
     data.append('year', currentYear);
     data.append('month', currentMonth+1);
 
+    // Realiza una solicitud al servidor para obtener las reservas del mes.
     fetch('getBookingsByMonth.php', {
         method: 'POST',
         body: data,
     })
     .then(function(response) {
-        return response.json();
+        return response.json(); 
     })
     .then(function(bookingsForMonth) {
+
+        // Una vez recibe los datos, procesa el calendario
         let date = new Date(currentYear, currentMonth, 1)
         let startDay = date.getDay();
         if(startDay == 0) startDay = 6;
@@ -51,14 +49,16 @@ function setupCalendar(){
 
         let daysIterated = 0;
 
+        // Obtiene el calendario
         let calendar = document.getElementById("calendar");
 
+        // Quita los dias que ya hubiese en el dalendario
         const daysToRemove = calendar.querySelectorAll(".day");
-
         daysToRemove.forEach(function(day) {
             day.remove();
         });
 
+        // Crea los dias vacios al principo del mes
         for (let i = 0; i < startDay; i++) {
             let emptyDiv = document.createElement("div");
             calendar.appendChild(emptyDiv);
@@ -67,15 +67,17 @@ function setupCalendar(){
             daysIterated++;
         }
 
+        // Crea los dias con numero y evento
         let numOfDays = new Date(currentYear, currentMonth+1, 0, 0).getDate();
-
         for (let i = 0; i < numOfDays; i++) {
             let dayDiv = document.createElement("div");
             dayDiv.classList.add("day");
             
+            // Se añade el numero del dia al div
             let dayNumber = document.createElement("p");
             dayNumber.innerHTML = i+1;
-            
+            dayDiv.appendChild(dayNumber);
+
             let otherBookings = 0;
             let userHasBooking = false;
             let courtsNum;
@@ -83,38 +85,47 @@ function setupCalendar(){
 
             for (let j = 0; j < bookingsForMonth.length; j++) {
                 const book = bookingsForMonth[j];
-                
                 if(book.day.split('-')[2]==i+1){
                     if(book.email == book.current) {
+                        // Si hay reserva del usuario el dia se verá azul
                         dayDiv.classList.add("myBooking");
                         userHasBooking = true;
                     } else {
+                        // Si hay reserva y no es del usuario se guarda
                         otherBookings+=1;
                     }
                 }
-
                 courtsNum = book.numCourts;
             }
 
+            // Si no hay ninguna reserva del usuario
             if(!userHasBooking){
+                // Se calcula el % de gente que hay ese dia
                 let thisDayInflux = ((otherBookings * 100) / (courtsNum * numOfHours));
                 thisDayInflux = Math.ceil(thisDayInflux);
                 
                 if(thisDayInflux == 100) {
+                    // Si esta completo el dia se verá rojo
                     dayDiv.classList.add("fullBookings");
                 } else if(thisDayInflux >= 50) {
+                    // Si esta al 50 o mas se verá amarillo
                     dayDiv.classList.add("highInflux")
                 }
             }
 
-            dayDiv.appendChild(dayNumber);
-
+            // Se añade un evento on click al dia
             dayDiv.addEventListener("click", function() {
                 let date = (currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
 
-                var data = new FormData();
-                data.append('date', date);
+                var bookingsForDay = bookingsForMonth.filter(function(reserva) {
+                    return reserva.day === date;
+                });
 
+                console.log(bookingsForDay);
+                /*var data = new FormData();
+                data.append('date', date);
+                
+                // Se pregunta a la base de datos por las reservas de ese dia en concreto
                 fetch('getBookingsByDay.php', {
                     method: 'POST',
                     body: data,
@@ -123,11 +134,12 @@ function setupCalendar(){
                     return response.json();
                 })
                 .then(function(bookingsForDay) {
-                    
+                    // Cuando recibe los datos, crea un div para poder empezar a reservar
+
                 })
                 .catch(function(error) {
                     console.error('Error:', error);
-                });
+                });*/
             });
 
             calendar.appendChild(dayDiv);

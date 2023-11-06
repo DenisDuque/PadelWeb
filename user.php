@@ -44,6 +44,7 @@
             }
         ?>
         <div class="calendarContainer">
+            
             <div id="calendar">
                 <?php
                     $days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
