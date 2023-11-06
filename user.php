@@ -62,7 +62,7 @@
                 <?php
                     if(empty($result)){
                         echo "<div class='booking' style='place-items: center;'>";
-                        echo "<p style='grid-column:1/4; grid-row:1/3;'>Hou have no pendent bookings</p>";
+                        echo "<p style='grid-column:1/4; grid-row:1/3;'>You have no pendent bookings</p>";
                         echo "</div>";
                     } else {
                         foreach ($result as $booking) {   
