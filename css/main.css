@@ -279,6 +279,13 @@ main .calendarContainer #calendar .day:active {
   background-color: #0a3531;
   filter: none;
 }
+main .calendarContainer #calendar .myBooking {
+  background-color: #009BBD;
+}
+main .calendarContainer #calendar .myBooking:active {
+  background-color: #007e9b;
+  filter: none;
+}
 main .yourBookings {
   width: 80vw;
   display: flex;

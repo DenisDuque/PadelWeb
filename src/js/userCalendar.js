@@ -32,58 +32,106 @@ function setupCalendar(){
     currentMonthLabel.innerHTML = monthsName[currentMonth];
     currentYearLabel.innerHTML = currentYear;
 
-    let date = new Date(currentYear, currentMonth, 1)
-    let startDay = date.getDay();
-    if(startDay == 0) {
-        startDay = 6
-    } else {
-        startDay -= 1;
-    }
+    var data = new FormData();
+    data.append('year', currentYear);
+    data.append('month', currentMonth+1);
 
-    let daysIterated = 0;
+    fetch('getBookings.php', {
+        method: 'POST',
+        body: data,
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(bookingsForMonth) {
+        let date = new Date(currentYear, currentMonth, 1)
+        let startDay = date.getDay();
+        if(startDay == 0) startDay = 6;
+        else startDay -= 1;
 
-    let calendar = document.getElementById("calendar");
+        let daysIterated = 0;
 
-    const daysToRemove = calendar.querySelectorAll(".day");
+        let calendar = document.getElementById("calendar");
 
-    daysToRemove.forEach(function(day) {
-        day.remove();
+        const daysToRemove = calendar.querySelectorAll(".day");
+
+        daysToRemove.forEach(function(day) {
+            day.remove();
+        });
+
+        for (let i = 0; i < startDay; i++) {
+            let emptyDiv = document.createElement("div");
+            calendar.appendChild(emptyDiv);
+            emptyDiv.classList.add("day");
+
+            daysIterated++;
+        }
+
+        let numOfDays = new Date(currentYear, currentMonth+1, 0, 0).getDate();
+
+        console.log(bookingsForMonth);
+
+        for (let i = 0; i < numOfDays; i++) {
+            let dayDiv = document.createElement("div");
+            dayDiv.classList.add("day");
+            
+            let dayNumber = document.createElement("p");
+            dayNumber.innerHTML = i+1;
+            
+            let otherBookings = 0;
+            let userHasBooking = false;
+            let courtsNum;
+            const numOfHours = 8;
+
+            for (let j = 0; j < bookingsForMonth.length; j++) {
+                const book = bookingsForMonth[j];
+                
+                if(book.day.split('-')[2]==i+1){
+                    if(book.email == book.current) {
+                        dayDiv.classList.add("myBooking");
+                        userHasBooking = true;
+                    } else {
+                        otherBookings+=1;
+                    }
+                }
+
+                courtsNum = book.numCourts;
+            }
+
+            if(!userHasBooking){
+                let thisDayInflux = ((otherBookings * 100) / (courtsNum * numOfHours));
+                thisDayInflux = Math.ceil(thisDayInflux);
+                
+                if(thisDayInflux == 100) {
+                    dayDiv.classList.add("fullBookings");
+                } else if(thisDayInflux >= 50) {
+                    dayDiv.classList.add("highInflux")
+                }
+            }
+
+            dayDiv.appendChild(dayNumber);
+
+            dayDiv.addEventListener("click", function() {
+                console.log(currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
+            });
+            calendar.appendChild(dayDiv);
+
+            daysIterated++;
+        }
+
+        while (daysIterated < 42) {
+            let emptyDiv = document.createElement("div");
+            calendar.appendChild(emptyDiv);
+            emptyDiv.classList.add("day");
+
+            daysIterated++;
+        }
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
     });
 
-    for (let i = 0; i < startDay; i++) {
-        let emptyDiv = document.createElement("div");
-        calendar.appendChild(emptyDiv);
-        emptyDiv.classList.add("day");
-
-        daysIterated++;
-    }
-
-    let numOfDays = new Date(currentYear, currentMonth+1, 0, 0).getDate();
     
-    for (let i = 0; i < numOfDays; i++) {
-        let dayDiv = document.createElement("div");
-        dayDiv.classList.add("day");
-        
-        let dayNumber = document.createElement("p");
-        dayNumber.innerHTML = i+1;
-        
-        dayDiv.appendChild(dayNumber);
-
-        dayDiv.addEventListener("click", function() {
-            console.log(currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
-        });
-        calendar.appendChild(dayDiv);
-
-        daysIterated++;
-    }
-
-    while (daysIterated < 42) {
-        let emptyDiv = document.createElement("div");
-        calendar.appendChild(emptyDiv);
-        emptyDiv.classList.add("day");
-
-        daysIterated++;
-    }
 }
 
 function addEvents() {

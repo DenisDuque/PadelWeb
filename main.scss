@@ -288,6 +288,33 @@ main{
                     filter: none;
                 }
             }
+
+            .myBooking{
+                background-color: $yourBooking;
+
+                &:active{
+                    background-color: $yourBookingActive;
+                    filter: none;
+                }
+            }
+
+            .highInflux{
+                background-color: $hasInflux;
+
+                &:active{
+                    background-color: $hasInfluxActive;
+                    filter: none;
+                }
+            }
+
+            .fullBookings {
+                background-color: $errorBoxes;
+
+                &:active{
+                    background-color: $fullBookActive;
+                    filter: none;
+                }
+            }
         }
     }
 

@@ -53,12 +53,6 @@
         </div>
         <div class="yourBookings">
             <h2>Your bookings</h2>
-            <?php
-                $connect = connectDataBase();
-                $sql = "SELECT * FROM booking WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE() AND status != 'CANCELLED'";
-                if(selectSQL($connect, $sql, $result)){
-                }
-            ?>
             <div id="bookingContainer">
                 <?php
                     if(empty($result)){

@@ -13,7 +13,7 @@
 <body>
     <?php
         include("functions.php");
-        $incorrectCredentials = "";
+        $incorrectCredentials = "a";
         if($_POST) {
             $email = $_POST['userEmail'];
             $password = md5($_POST['userPassword']);
@@ -38,7 +38,13 @@
                 <div class='imageContainer'><img src="src/img/password.png" alt="Password:"/></div>
                 <input type="password" class="loginInput" name="userPassword" id="userPassword" placeholder="Password">
             </div>
-            <p class="errorLogin"><?php echo $incorrectCredentials; ?></p>
+            <?php
+                if($incorrectCredentials=="a"){
+                    echo "<p class='errorLogin' style='visibility:hidden;'>$incorrectCredentials</p>";
+                } else {
+                    echo "<p class='errorLogin'>$incorrectCredentials</p>";
+                }
+            ?>
             <input type="submit" id="loginButton" value="LOGIN">
         </form>
         <?php
