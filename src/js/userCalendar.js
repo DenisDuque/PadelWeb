@@ -36,7 +36,7 @@ function setupCalendar(){
     data.append('year', currentYear);
     data.append('month', currentMonth+1);
 
-    fetch('getBookings.php', {
+    fetch('getBookingsByMonth.php', {
         method: 'POST',
         body: data,
     })
@@ -68,8 +68,6 @@ function setupCalendar(){
         }
 
         let numOfDays = new Date(currentYear, currentMonth+1, 0, 0).getDate();
-
-        console.log(bookingsForMonth);
 
         for (let i = 0; i < numOfDays; i++) {
             let dayDiv = document.createElement("div");
@@ -112,8 +110,26 @@ function setupCalendar(){
             dayDiv.appendChild(dayNumber);
 
             dayDiv.addEventListener("click", function() {
-                console.log(currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
+                let date = (currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
+
+                var data = new FormData();
+                data.append('date', date);
+
+                fetch('getBookingsByDay.php', {
+                    method: 'POST',
+                    body: data,
+                })
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(bookingsForDay) {
+                    
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
             });
+
             calendar.appendChild(dayDiv);
 
             daysIterated++;
@@ -158,14 +174,6 @@ function addEvents() {
         }
         setupCalendar();
     })
-
-    expandButton.addEventListener("click", function() {
-        let bookingContainer = document.getElementById("bookingContainer");
-
-        bookingContainer.style.maxHeight = "none";
-
-        expandButton.remove();
-    });
 }
 
 function cancelButtons(){

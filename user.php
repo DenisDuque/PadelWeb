@@ -37,7 +37,12 @@
             <button class="changeMonth" id="nxt"><img id="nextMonth" src="src/img/arrow.png" alt="Next Month"></button>
             <h3 id="year"></h3>
         </div>
-
+        <?php
+            $connect = connectDataBase();
+            $sql = "SELECT * FROM booking WHERE email = '" . $_SESSION['userEmail'] . "' AND day >= CURDATE() AND status != 'CANCELLED'";
+            if(selectSQL($connect, $sql, $result)){
+            }
+        ?>
         <div class="calendarContainer">
             <div id="calendar">
                 <?php
@@ -61,18 +66,12 @@
                         echo "</div>";
                     } else {
                         foreach ($result as $booking) {   
-                            createBookingDiv($booking);
+                            createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);createBookingDiv($booking);
                         }
+                        echo "</div><div class='blurry'>";
                     }
                 ?>
             </div>
-            <?php
-                if(!empty($result)){
-                    echo "<button id='expandBookings'>
-                            <img src='src/img/arrow.png' alt='expand bookings'>
-                        </button>";
-                }
-            ?>
         </div>
     </main>
     <?php

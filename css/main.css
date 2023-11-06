@@ -286,6 +286,20 @@ main .calendarContainer #calendar .myBooking:active {
   background-color: #007e9b;
   filter: none;
 }
+main .calendarContainer #calendar .highInflux {
+  background-color: #FFD348;
+}
+main .calendarContainer #calendar .highInflux:active {
+  background-color: #d4b03a;
+  filter: none;
+}
+main .calendarContainer #calendar .fullBookings {
+  background-color: #770000;
+}
+main .calendarContainer #calendar .fullBookings:active {
+  background-color: #550000;
+  filter: none;
+}
 main .yourBookings {
   width: 80vw;
   display: flex;
@@ -299,13 +313,17 @@ main .yourBookings h2 {
   margin-bottom: 1rem;
 }
 main .yourBookings #bookingContainer {
-  max-height: 20vh;
+  max-height: 25vh;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 main .yourBookings #bookingContainer .booking {
+  width: 80%;
   background-color: #007369;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   padding: 1rem;
   border-radius: 2vh;
   display: grid;
@@ -318,7 +336,7 @@ main .yourBookings #bookingContainer .booking p {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 main .yourBookings #bookingContainer .booking p strong {
-  font-size: 2vh;
+  font-size: 1.5vh;
 }
 main .yourBookings #bookingContainer .booking button {
   grid-row: 1/3;
@@ -338,6 +356,17 @@ main .yourBookings #bookingContainer .booking button {
   padding: 1rem;
   display: grid;
   align-content: center;
+}
+main .yourBookings .blurry {
+  width: 100% vw;
+  height: 2vh;
+  filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  background-color: rgba(0, 55, 64, 0.8);
+  z-index: 2;
+  position: relative;
+  bottom: 1vh;
 }
 main .yourBookings #expandBookings {
   background-color: #003840;
