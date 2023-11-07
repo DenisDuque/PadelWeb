@@ -7,9 +7,18 @@ function allActions(){
 }
 
 // Arreglo de nombres de meses.
-let monthsName = [
+const monthsName = [
     "January", "February", "March", "April", "May", "June", "July",
     "August", "September", "October", "November", "December"
+];
+
+const weekdaysName = [
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday', 
+    'Thursday', 'Friday', 'Saturday'
+];
+
+const hoursAvailable = [
+    '08:00','09:30','11:00','12:30','15:00','16:30','18:00','19:30', '21:00'
 ];
 
 // Obtiene la fecha actual.
@@ -81,7 +90,7 @@ function setupCalendar(){
             let otherBookings = 0;
             let userHasBooking = false;
             let courtsNum;
-            const numOfHours = 8;
+            
 
             for (let j = 0; j < bookingsForMonth.length; j++) {
                 const book = bookingsForMonth[j];
@@ -101,7 +110,7 @@ function setupCalendar(){
             // Si no hay ninguna reserva del usuario
             if(!userHasBooking){
                 // Se calcula el % de gente que hay ese dia
-                let thisDayInflux = ((otherBookings * 100) / (courtsNum * numOfHours));
+                let thisDayInflux = ((otherBookings * 100) / (courtsNum * hoursAvailable.length));
                 thisDayInflux = Math.ceil(thisDayInflux);
                 
                 if(thisDayInflux == 100) {
@@ -115,31 +124,56 @@ function setupCalendar(){
 
             // Se añade un evento on click al dia
             dayDiv.addEventListener("click", function() {
-                let date = (currentYear+"-"+(currentMonth+1)+"-"+dayNumber.innerHTML);
+                let numberDay = dayNumber.innerHTML;
+                if(numberDay.length===1) numberDay = "0"+numberDay;
 
+                let date = (currentYear+"-"+(currentMonth+1)+"-"+numberDay);
+
+                // Filtra las resevas para el dia en el que se clica
                 var bookingsForDay = bookingsForMonth.filter(function(reserva) {
                     return reserva.day === date;
                 });
 
                 console.log(bookingsForDay);
-                /*var data = new FormData();
-                data.append('date', date);
                 
-                // Se pregunta a la base de datos por las reservas de ese dia en concreto
-                fetch('getBookingsByDay.php', {
-                    method: 'POST',
-                    body: data,
-                })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(bookingsForDay) {
-                    // Cuando recibe los datos, crea un div para poder empezar a reservar
+                // Crea el div
+                let bookingSelector = document.createElement("div");
+                bookingSelector.classList.add("bookingSelector");
 
-                })
-                .catch(function(error) {
-                    console.error('Error:', error);
-                });*/
+                // Consigue el dia en el que clica
+                
+                let numberDayP = document.createElement("p");
+                numberDayP.innerHTML = dayNumber.innerHTML;
+
+                let nameDay = weekdaysName[new Date(date).getDay()];
+                let nameDayP = document.createElement("p");
+                nameDayP.innerHTML = nameDay;
+
+                bookingSelector.appendChild(numberDayP);
+                bookingSelector.appendChild(nameDayP);
+
+                let selectedHour = "nothing";
+
+                hoursAvailable.forEach(hour => {
+                    hourDiv = document.createElement("div");
+                    hourDiv.classList.add("hour");
+                    hourDiv.id = hour;
+
+                    let hourDisplay = document.createElement("p");
+                    hourDisplay.innerHTML = hour.startsWith("0") ? hour.substring(1) : hour;
+                    hourDiv.appendChild(hourDisplay);
+
+                    hourDiv.addEventListener("click", function() {
+                        selectedHour = hour;
+                        console.log(selectedHour);
+                    })
+
+                    bookingSelector.appendChild(hourDiv);
+                });
+
+
+
+                calendar.parentElement.appendChild(bookingSelector);
             });
 
             calendar.appendChild(dayDiv);
@@ -165,7 +199,6 @@ function setupCalendar(){
 function addEvents() {
     let prevButton = document.getElementById("prv");
     let nextButton = document.getElementById("nxt");
-    let expandButton = document.getElementById("expandBookings");
 
     prevButton.addEventListener("click", function() {
         if (currentMonth == 0) {

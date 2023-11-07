@@ -7,7 +7,8 @@
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=close.php'>";
     }else{
         $date = $_REQUEST['date'];
-        $sql = "SELECT * FROM booking WHERE day = '" . $date . "' AND status != 'CANCELLED'";
+        $hour = $_REQUEST['hour']
+        $sql = "SELECT courtId FROM court WHERE isAvailable = 1 AND courtId NOT IN (SELECT courtId from booking WHERE day = x AND hour = x) LIMIT 1";
         $conection = connectDataBase();
 
         $bookingArray = array();
