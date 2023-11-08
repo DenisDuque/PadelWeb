@@ -141,19 +141,19 @@ function setupCalendar(){
                 bookingSelector.classList.add("bookingSelector");
 
                 // Consigue el dia en el que clica
-                
-                let numberDayP = document.createElement("p");
-                numberDayP.innerHTML = dayNumber.innerHTML;
-
                 let nameDay = weekdaysName[new Date(date).getDay()];
-                let nameDayP = document.createElement("p");
-                nameDayP.innerHTML = nameDay;
-
+                let numberDayP = document.createElement("p");
+                numberDayP.innerHTML = nameDay;
+                numberDayP.innerHTML += " " + dayNumber.innerHTML;
                 bookingSelector.appendChild(numberDayP);
-                bookingSelector.appendChild(nameDayP);
 
-                let selectedHour = "nothing";
+                let monthP = document.createElement("p");
+                monthP.innerHTML = monthsName[currentMonth];
+                bookingSelector.appendChild(monthP);
 
+                let hourContainer = document.createElement("div");
+                hourContainer.classList.add("hourContainer");
+                
                 hoursAvailable.forEach(hour => {
                     hourDiv = document.createElement("div");
                     hourDiv.classList.add("hour");
@@ -164,12 +164,12 @@ function setupCalendar(){
                     hourDiv.appendChild(hourDisplay);
 
                     hourDiv.addEventListener("click", function() {
-                        selectedHour = hour;
-                        console.log(selectedHour);
+                        hourEvent(hour);
                     })
 
-                    bookingSelector.appendChild(hourDiv);
+                    hourContainer.appendChild(hourDiv);
                 });
+                bookingSelector.appendChild(hourContainer);
 
 
 
@@ -192,8 +192,19 @@ function setupCalendar(){
     .catch(function(error) {
         console.error('Error:', error);
     });
-
     
+}
+
+function hourEvent(hour) {
+    let clickedDiv = document.getElementsByClassName("clicked");
+    if (clickedDiv.length>0) {
+        clickedDiv[0].classList.remove("clicked");
+    }
+    
+    let hourDiv = document.getElementById(hour);
+    hourDiv.classList.add("clicked");
+
+    console.log(hour);
 }
 
 function addEvents() {
