@@ -321,7 +321,6 @@ main{
             }
         }
 
-
         // SELECTOR DE RESERVAS
         .bookingSelector{
             width: 80vw;
@@ -385,11 +384,11 @@ main{
             .confirmDiv{
                 grid-column: 1/3;
                 background-color: $calendarDayBackground;
-                place-self: center;
-                width: 90%;
+                place-self: left;
+                width: 88%;
                 height: 80%;
                 margin-bottom: 1rem;
-                margin-left: 0.3rem;
+                margin-left: 1rem;
                 border-radius: 1vh;
 
                 display: flex;
@@ -432,7 +431,7 @@ main{
                 flex-direction: column;
                 justify-content: space-evenly;
 
-                margin-bottom: 1rem;
+                margin-bottom: 1.8rem;
                 font-size: 0.8rem;
 
                 .halfBooked::before{
