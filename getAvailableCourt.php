@@ -7,19 +7,20 @@
         echo "<META HTTP-EQUIV='REFRESH' CONTENT='0;URL=close.php'>";
     }else{
         $date = $_REQUEST['date'];
-        $hour = $_REQUEST['hour']
-        $sql = "SELECT courtId FROM court WHERE isAvailable = 1 AND courtId NOT IN (SELECT courtId from booking WHERE day = x AND hour = x) LIMIT 1";
+        $hour = $_REQUEST['hour'];
+        $sql = "SELECT courtId FROM court WHERE isAvailable = 1 AND courtId NOT IN (SELECT courtId from booking WHERE day = '" . $date . "' AND hour = '" . $hour . "') LIMIT 1";
         $conection = connectDataBase();
 
         $bookingArray = array();
 
         $courtsSQL = "SELECT count(*) FROM court WHERE isAvailable = '1'";
-        if(selectSQL($conection, $courtsSQL, $courtsResult)){
-            $numOfCourts = $courtsResult[0]['count(*)'];
+        if(selectSQL($conection, $sql, $courtsResult)){
+            //$numOfCourts = $courtsResult[0]['count(*)'];
         }
 
         if(selectSQL($conection, $sql, $result)) {
-            foreach ($result as $booking) {
+            print_r($result);
+            /*foreach ($result as $booking) {
                 $bookingJSON = array(
                     'bookingId' => $booking["bookingId"],
                     'email' => $booking["email"],
@@ -35,7 +36,7 @@
             header('Content-Type: application/json');
             $jsonResult = json_encode($bookingArray);
 
-            print_r($jsonResult);
+            print_r($jsonResult);*/
         }
     }   
 ?>

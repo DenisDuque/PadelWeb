@@ -331,13 +331,13 @@ main{
             z-index: 3;
             position: absolute;
             display: grid;
-            grid-template-rows: 20% 50% 30%;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 10% 50% 40%;
+            grid-template-columns: repeat(3, 1fr);
 
             p.date{
                 place-self: center;
                 font-weight: bolder;
-                grid-column: 1/4;
+                grid-column: 1/3;
                 font-size: 2vh;
                 margin-top: 1rem;
             }
@@ -373,15 +373,76 @@ main{
                 grid-column: 1/3;
                 background-color: $calendarDayBackground;
                 place-self: center;
-                width: 80%;
+                width: 90%;
                 height: 80%;
                 margin-bottom: 1rem;
                 margin-left: 0.3rem;
                 border-radius: 1vh;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                p{
+                    text-align: center;
+                    margin-top: 0.5rem;
+                }
+
+                button {
+                    width: 80%;
+                    height: 2.5rem;
+                    margin-bottom: 1rem;
+                    border-radius: 1vh;
+                    background-color: $confirmButton;
+                    font-size: 1.2rem;
+                    text-transform: uppercase;
+                    color: white;
+                    font-weight: bold;
+                    border: none;
+                    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+                    &:disabled{
+                        @include confirmPressedDown;
+                    }
+
+                    &:active{
+                        @include confirmPressedDown;
+                        transform: scale(95%);
+                    }
+                }
             }
 
             .infoDiv{
                 grid-column: 3/5;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                margin-bottom: 1rem;
+                font-size: 0.8rem;
+
+                .halfBooked::before{
+                    content: "●";
+                    color: $hasInflux;
+                    margin-right: 2px;
+                    margin-top: 2px;
+                    font-size: 1.2rem;
+                }
+                .fullBooked::before{
+                    content: "●";
+                    color: $errorBoxes;
+                    margin-right: 2px;
+                    margin-top: 2px;
+                    font-size: 1.2rem;
+                }
+                .yourBooking::before{
+                    content: "●";
+                    color: $yourBooking;
+                    margin-right: 2px;
+                    margin-top: 2px;
+                    font-size: 1.2rem;
+                }
             }
         }
     }

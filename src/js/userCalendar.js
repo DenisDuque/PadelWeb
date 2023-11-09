@@ -173,12 +173,31 @@ function setupCalendar(){
                 let bookAtP = document.createElement("p")
                 bookAtP.innerHTML = "Select a hour to book";
                 confirmDiv.appendChild(bookAtP);
+                let confirmButton = document.createElement("button");
+                confirmButton.innerHTML = "Confirm";
+                confirmButton.id = "confirmB";
+                confirmButton.disabled = true;
+                confirmDiv.appendChild(confirmButton);
                 bookingSelector.appendChild(confirmDiv);
 
                 let infoDiv = document.createElement("div");
                 infoDiv.classList.add("infoDiv");
-                bookingSelector.appendChild(infoDiv);
 
+                let halfBooked = document.createElement("p");
+                halfBooked.classList.add("halfBooked");
+                halfBooked.innerText = "50% booked";
+                let fullBooked = document.createElement("p");
+                fullBooked.classList.add("fullBooked");
+                fullBooked.innerText = "All booked";
+                let yourBooking = document.createElement("p");
+                yourBooking.classList.add("yourBooking");
+                yourBooking.innerText = "Your booking";
+
+                infoDiv.appendChild(halfBooked);
+                infoDiv.appendChild(fullBooked);
+                infoDiv.appendChild(yourBooking);
+
+                bookingSelector.appendChild(infoDiv);
                 
                 calendar.parentElement.appendChild(bookingSelector);
             });
@@ -210,8 +229,30 @@ function hourEvent(hour) {
     
     let hourDiv = document.getElementById(hour);
     hourDiv.classList.add("clicked");
+    
+    let confirmButton = document.getElementById("confirmB");
+    confirmButton.disabled = false;
+    let bookAtP = confirmButton.parentElement.getElementsByTagName("p");
+    bookAtP = bookAtP[0];
+    bookAtP.innerHTML = "Book at "
+    bookAtP.innerHTML += hour.startsWith("0") ? hour.substring(1) : hour;
+    
+    var data = new FormData();
+    data.append('hour',hour);
 
-    console.log(hour);
+    fetch('getAvailableCourt.php', {
+        method: 'POST',
+        body: data,
+    })
+    .then(function(response) {
+        return response.json(); 
+    })
+    .then(function(availableCourt) {
+
+    })
+    .catch(function(error) {
+        console.error('Error:', error);
+    });
 }
 
 function addEvents() {
