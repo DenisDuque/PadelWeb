@@ -130,9 +130,7 @@ function setupCalendar(){
                 let date = (currentYear+"-"+(currentMonth+1)+"-"+numberDay);
 
                 // Filtra las resevas para el dia en el que se clica
-                var bookingsForDay = bookingsForMonth.filter(function(reserva) {
-                    return reserva.day === date;
-                });
+                let bookingsForDay = bookingsForMonth.filter(booking => booking.day == date);
 
                 console.log(bookingsForDay);
                 
@@ -152,17 +150,38 @@ function setupCalendar(){
                 hourContainer.classList.add("hourContainer");
                 
                 hoursAvailable.forEach(hour => {
+                    let bookingsForHour = bookingsForDay.filter(booking => booking.hour == hour);
+                    let userHasBooking = false;
+                    let otherBookings = 0;
+                    let courtsNum = -1;
+                    if(bookingsForHour.length>0) {
+                        courtsNum++;
+                        bookingsForHour.forEach(booking => {
+                            if(booking.email === booking.current) userHasBooking = true;
+                            else otherBookings+=1;
+                            courtsNum = booking.numCourts;
+                        });
+                    }
+
+                    
+
                     hourDiv = document.createElement("div");
                     hourDiv.classList.add("hour");
                     hourDiv.id = hour;
+
+                    if(userHasBooking) hourDiv.classList.add("myBooking");
+                    else if(otherBookings == courtsNum) hourDiv.classList.add("fullBooked");
+                    else if(otherBookings < courtsNum && otherBookings >= (courtsNum/2)) hourDiv.classList.add("halfBooked");
 
                     let hourDisplay = document.createElement("p");
                     hourDisplay.innerHTML = hour.startsWith("0") ? hour.substring(1) : hour;
                     hourDiv.appendChild(hourDisplay);
 
-                    hourDiv.addEventListener("click", function() {
-                        hourEvent(hour);
-                    })
+                    if(!userHasBooking && otherBookings != courtsNum){
+                        hourDiv.addEventListener("click", function() {
+                            hourEvent(hour, date);
+                        })
+                    }
 
                     hourContainer.appendChild(hourDiv);
                 });
@@ -221,7 +240,7 @@ function setupCalendar(){
     
 }
 
-function hourEvent(hour) {
+function hourEvent(hour, date) {
     let clickedDiv = document.getElementsByClassName("clicked");
     if (clickedDiv.length>0) {
         clickedDiv[0].classList.remove("clicked");
@@ -239,6 +258,7 @@ function hourEvent(hour) {
     
     var data = new FormData();
     data.append('hour',hour);
+    data.append('date',date);
 
     fetch('getAvailableCourt.php', {
         method: 'POST',
@@ -248,7 +268,9 @@ function hourEvent(hour) {
         return response.json(); 
     })
     .then(function(availableCourt) {
-
+        confirmButton.addEventListener("click", function() {
+            location.href = "user.php?court="+availableCourt.courtId+"&hour="+hour+"&date="+date;
+        })
     })
     .catch(function(error) {
         console.error('Error:', error);

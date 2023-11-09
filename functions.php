@@ -113,4 +113,40 @@ function createBookingDiv($booking) {
     echo "<button id='$id' class='cancelButton'>Cancel</button>";
     echo "</div>";
 }
+
+function clog($str) {
+    echo "<script>console.log(`$str`)</script>";
+}
+
+function updateSQL($connection, $sql) {
+    $executeQuery = $connection->prepare($sql);
+    if ($executeQuery === false) {
+        return "Error en la preparación de la consulta: " . $connection->error;
+    }
+    // Ejecuta la consulta y en caso de error te lo dice
+    if ($executeQuery->execute() === false) {
+        return "Error al insertar el registro: " . $executeQuery->error;
+    }
+    // Cerrar la conexión a la base de datos y la query
+    $executeQuery->close();
+    $connection->close();
+    return "Update succes!";
+}
+
+function insertSQL($connection, $sql) {
+    try {
+        $executeQuery = $connection->prepare($sql);
+        $executeQuery->execute();
+        return 0;
+    } catch(mysqli_sql_exception $e){
+        // 1062 es el código de error para una clave primaria duplicada
+        if ($e->getCode() == 1062) {
+            return 1062;
+        } else {
+            $error = $e->getMessage();
+            echo "<script>alert('{$error}')</script>";
+        }
+        return $e->getCode();
+    }
+}
 ?>

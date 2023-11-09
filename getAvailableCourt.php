@@ -8,35 +8,20 @@
     }else{
         $date = $_REQUEST['date'];
         $hour = $_REQUEST['hour'];
-        $sql = "SELECT courtId FROM court WHERE isAvailable = 1 AND courtId NOT IN (SELECT courtId from booking WHERE day = '" . $date . "' AND hour = '" . $hour . "') LIMIT 1";
+        $sql = "SELECT courtId FROM court WHERE isAvailable = 1 AND courtId NOT IN (SELECT courtId from booking WHERE status != 'CANCELLED' AND day = '" . $date . "' AND hour = '" . $hour . "') LIMIT 1";
         $conection = connectDataBase();
 
-        $bookingArray = array();
-
-        $courtsSQL = "SELECT count(*) FROM court WHERE isAvailable = '1'";
-        if(selectSQL($conection, $sql, $courtsResult)){
-            //$numOfCourts = $courtsResult[0]['count(*)'];
-        }
-
         if(selectSQL($conection, $sql, $result)) {
-            print_r($result);
-            /*foreach ($result as $booking) {
-                $bookingJSON = array(
-                    'bookingId' => $booking["bookingId"],
-                    'email' => $booking["email"],
-                    'courtId' => $booking["courtId"],
-                    'day' => $booking["day"],
-                    'hour' => $booking["hour"],
-                    'status' => $booking["status"],
-                    'current' => $_SESSION['userEmail'],
-                    'numCourts' => $numOfCourts
+            foreach ($result as $court) {
+                $courtJSON = array(
+                    'courtId' => $court['courtId']
                 );
-                array_push($bookingArray, $bookingJSON);
             }
+            
             header('Content-Type: application/json');
-            $jsonResult = json_encode($bookingArray);
+            $jsonResult = json_encode($courtJSON);
 
-            print_r($jsonResult);*/
+            print_r($jsonResult);
         }
     }   
 ?>
