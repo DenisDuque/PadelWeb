@@ -196,6 +196,9 @@ function setupCalendar(){
                 confirmButton.innerHTML = "Confirm";
                 confirmButton.id = "confirmB";
                 confirmButton.disabled = true;
+                confirmButton.addEventListener("click", function() {
+                    bookCourt();
+                })
                 confirmDiv.appendChild(confirmButton);
                 bookingSelector.appendChild(confirmDiv);
 
@@ -240,6 +243,9 @@ function setupCalendar(){
     
 }
 
+let gHour = "";
+let gDate = "";
+
 function hourEvent(hour, date) {
     let clickedDiv = document.getElementsByClassName("clicked");
     if (clickedDiv.length>0) {
@@ -256,25 +262,32 @@ function hourEvent(hour, date) {
     bookAtP.innerHTML = "Book at "
     bookAtP.innerHTML += hour.startsWith("0") ? hour.substring(1) : hour;
     
-    var data = new FormData();
-    data.append('hour',hour);
-    data.append('date',date);
+    gHour = hour;
+    gDate = date;
+}
 
-    fetch('getAvailableCourt.php', {
-        method: 'POST',
-        body: data,
-    })
-    .then(function(response) {
-        return response.json(); 
-    })
-    .then(function(availableCourt) {
-        confirmButton.addEventListener("click", function() {
-            location.href = "user.php?court="+availableCourt.courtId+"&hour="+hour+"&date="+date;
+function bookCourt() {
+    if(gHour ==="" || gDate===""){
+        console.log("Nada");
+    } else {
+        var data = new FormData();
+        data.append('hour',gHour);
+        data.append('date',gDate);
+
+        fetch('getAvailableCourt.php', {
+            method: 'POST',
+            body: data,
         })
-    })
-    .catch(function(error) {
-        console.error('Error:', error);
-    });
+        .then(function(response) {
+            return response.json(); 
+        })
+        .then(function(availableCourt) {
+            location.href = "user.php?court="+availableCourt.courtId+"&hour="+gHour+"&date="+gDate;
+        })
+        .catch(function(error) {
+            console.error('Error:', error);
+        });
+    }
 }
 
 function addEvents() {

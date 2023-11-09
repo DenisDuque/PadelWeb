@@ -34,14 +34,13 @@
                     $connect = connectDataBase();
 
                     $cancelSQL = "UPDATE booking SET status = 'CANCELLED' WHERE bookingId = '" . $_GET['cancelId'] . "';";
-                    clog(updateSQL($connect, $cancelSQL));
+                    updateSQL($connect, $cancelSQL);
                     echo '<meta http-equiv="refresh" content="0;url=user.php">';
                 } else if(isset($_GET['court']) && isset($_GET['hour']) && isset($_GET['date'])){
-                    clog("hola");
                     $connect = connectDataBase();
 
                     $cancelSQL = "INSERT INTO booking (email, courtId, day, hour, status) VALUES ('" . $_SESSION['userEmail'] . "', '" . $_GET['court'] . "', '" . $_GET['date'] . "', '" . $_GET['hour'] . "', 'NOTPAID');";
-                    clog(updateSQL($connect, $cancelSQL));
+                    updateSQL($connect, $cancelSQL);
                     echo '<meta http-equiv="refresh" content="0;url=user.php">';
                 }
             }
