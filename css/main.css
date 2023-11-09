@@ -510,4 +510,33 @@ main .yourBookings #expandBookings img {
 }
 main .yourBookings #expandBookings:active {
   background-color: #002c33;
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+  body {
+    display: flex;
+    flex-direction: row;
+  }
+  body #loginDiv {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100svh;
+    margin: 3rem;
+  }
+  body #loginDiv .logo {
+    margin: 0px;
+    width: 40vw;
+  }
+  body #loginDiv form {
+    margin: 0px;
+  }
+  body #loginDiv form .loginInput {
+    height: 15vh;
+    width: 50vw;
+  }
+  body #loginDiv form #loginButton {
+    height: 15vh;
+    width: 50vw;
+  }
 }/*# sourceMappingURL=main.css.map */

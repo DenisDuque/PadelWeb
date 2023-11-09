@@ -1,0 +1,35 @@
+@media screen and (max-width: 900px) and (orientation: landscape) {
+
+       body{
+        display: flex;
+        flex-direction: row;
+
+        #loginDiv{
+            display: flex;
+            flex-direction: row;
+
+            width: 100vw;
+            height: 100svh;
+            margin: 3rem;
+
+            .logo{
+                margin: 0px;
+                width: 40vw;
+            }
+
+            form{
+                margin: 0px;
+
+                .loginInput{
+                    height: 15vh;
+                    width: 50vw;
+                }
+
+                #loginButton{
+                    height: 15vh;
+                    width: 50vw;
+                }
+            }
+        }
+       }
+}
