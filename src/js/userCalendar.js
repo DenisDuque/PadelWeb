@@ -144,12 +144,9 @@ function setupCalendar(){
                 let nameDay = weekdaysName[new Date(date).getDay()];
                 let numberDayP = document.createElement("p");
                 numberDayP.innerHTML = nameDay;
-                numberDayP.innerHTML += " " + dayNumber.innerHTML;
+                numberDayP.innerHTML += " " + dayNumber.innerHTML + "  " + monthsName[currentMonth];
+                numberDayP.classList.add("date")
                 bookingSelector.appendChild(numberDayP);
-
-                let monthP = document.createElement("p");
-                monthP.innerHTML = monthsName[currentMonth];
-                bookingSelector.appendChild(monthP);
 
                 let hourContainer = document.createElement("div");
                 hourContainer.classList.add("hourContainer");
@@ -171,8 +168,18 @@ function setupCalendar(){
                 });
                 bookingSelector.appendChild(hourContainer);
 
+                let confirmDiv = document.createElement("div");
+                confirmDiv.classList.add("confirmDiv");
+                let bookAtP = document.createElement("p")
+                bookAtP.innerHTML = "Select a hour to book";
+                confirmDiv.appendChild(bookAtP);
+                bookingSelector.appendChild(confirmDiv);
 
+                let infoDiv = document.createElement("div");
+                infoDiv.classList.add("infoDiv");
+                bookingSelector.appendChild(infoDiv);
 
+                
                 calendar.parentElement.appendChild(bookingSelector);
             });
 
