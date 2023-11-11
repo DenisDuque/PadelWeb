@@ -1,3 +1,5 @@
+'use strict';
+
 window.onload = allActions;
 
 function allActions(){
@@ -136,7 +138,7 @@ function setupCalendar(){
                 
                 // Crea el div
                 let bookingSelector = document.createElement("div");
-                bookingSelector.classList.add("bookingSelector");
+                bookingSelector.id = "bookingSelector";
 
                 // Consigue el dia en el que clica
                 let nameDay = weekdaysName[new Date(date).getDay()];
@@ -145,6 +147,19 @@ function setupCalendar(){
                 numberDayP.innerHTML += " " + dayNumber.innerHTML + "  " + monthsName[currentMonth];
                 numberDayP.classList.add("date")
                 bookingSelector.appendChild(numberDayP);
+
+                let closeButton = document.createElement("button");
+                let closeButtonImg = document.createElement("img");
+                closeButtonImg.alt = "close booking selector";
+                closeButtonImg.src = "src/img/cross.png";
+                closeButton.appendChild(closeButtonImg);
+                closeButton.classList.add("closeButton");
+
+                closeButton.addEventListener("click", function() {
+                    closeButtonEvent();
+                });
+
+                bookingSelector.appendChild(closeButton);
 
                 let hourContainer = document.createElement("div");
                 hourContainer.classList.add("hourContainer");
@@ -165,7 +180,7 @@ function setupCalendar(){
 
                     
 
-                    hourDiv = document.createElement("div");
+                    let hourDiv = document.createElement("div");
                     hourDiv.classList.add("hour");
                     hourDiv.id = hour;
 
@@ -301,6 +316,7 @@ function addEvents() {
         } else {
             currentMonth-=1;
         }
+        closeButtonEvent()
         setupCalendar();
     });
 
@@ -311,6 +327,7 @@ function addEvents() {
         } else {
             currentMonth+=1;
         }
+        closeButtonEvent()
         setupCalendar();
     })
 }
@@ -323,7 +340,11 @@ function cancelButtons(){
             openCancelBooking(button.id);
         })
     }
-        
+}
+
+function closeButtonEvent(){
+    let bookingSelector = document.getElementById("bookingSelector");
+    if(bookingSelector) bookingSelector.remove();
 }
 
 function openCancelBooking(id){
