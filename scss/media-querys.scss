@@ -1,5 +1,5 @@
 @media screen and (max-width: 933px) and (orientation: landscape) {
-
+    // Login styles
     body{
 
         width: 100vw;
@@ -42,8 +42,6 @@
                         font-size: 6vh;
                         border-radius: 11vh;
                     }
-
-                    
                 }
 
                 .errorLogin{
@@ -60,4 +58,114 @@
             }
         }
        }
+
+    // Main Page styles
+    header{
+        height: 15svh;
+        width: 100vw;
+        display: flex;
+        padding: 0px;
+        justify-content: space-around;
+        margin-left: 5vw;
+        margin-right: 5vw;
+
+        img{
+            height: 10svh;
+            width: 10svh;
+        }
+
+        h1{
+            margin: 0px;
+            font-size: 3vw;
+        }
+
+        a{
+            justify-self: flex-end;
+            img{
+                height: 8svh;
+                width: 8svh;
+            }
+        }
+    }
+
+    main{
+        height: 85svh;
+        width: 100vw;
+        display: grid;
+        place-items: center;
+        grid-template-columns: repeat(2, 50vw);
+        grid-template-rows: 10svh 70svh;
+        
+        .datePicker{
+            margin-top: 1.5vh;
+            display: grid;
+            grid-template-rows: 0;
+            grid-template-columns: 1fr 2fr 2fr 1fr;
+            #prv{
+                grid-column: 1/2;
+            }
+            #month{
+                grid-column: 2/3;
+            }
+            #year{
+                font-size: 3vh;
+                grid-column: 3/4;
+            }
+            #nxt{
+                grid-column: 4/5;
+            }
+        }
+
+        .calendarContainer{
+            width: 30vw;
+            height: 30vw;
+            margin-top: 1.5vh;
+
+            #calendar{
+                width: 100%;
+                height: 100%;
+                .dayHeader{
+                    p{
+                        font-size: 1.5vw;
+                    }
+                }
+                .dayHeader, .day{
+                    height: 75%;
+                    width: 75%;
+                    font-size: auto;
+                }
+            }
+        }
+        
+        .yourBookings{
+            grid-column: 2/3;
+            grid-row: 1/3;
+            width: 100%;
+            margin: 0px;
+            height: 100%;
+            margin-top: 1.5vw;
+            h2{
+                font-size: 2vw;
+            }
+
+            #bookingContainer{
+                max-height: 85vh;
+                .booking{
+                    p{
+                        font-size: 1vw;
+                        strong{
+                            font-size: 1.5vw;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    #cancelDiv{
+        min-height: 60vh;
+        max-height: 60vh;
+        margin-bottom: 5vh;
+    }
 }

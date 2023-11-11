@@ -341,7 +341,7 @@ function openCancelBooking(id){
 
     let text = document.createElement("p");
     text.classList.add("text");
-    text.innerHTML = "Are you sure you want to <br>cancel this booking?";
+    text.innerHTML = "Are you sure you want to cancel this booking?";
     cancelDiv.appendChild(text);
     
     let parent = document.getElementById(id).parentElement;
