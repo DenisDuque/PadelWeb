@@ -324,6 +324,21 @@ main .calendarContainer #bookingSelector p.date {
   margin-top: 1rem;
   margin-left: 1rem;
 }
+main .calendarContainer #bookingSelector .closeButton {
+  background-color: rgb(0, 90, 91);
+  border: none;
+  place-self: center;
+  margin-top: 2vh;
+  padding: 1vh;
+  border-radius: 50%;
+}
+main .calendarContainer #bookingSelector .closeButton img {
+  height: 2vh;
+  aspect-ratio: 1/1;
+}
+main .calendarContainer #bookingSelector .closeButton:active {
+  background-color: #0a3531;
+}
 main .calendarContainer #bookingSelector .hourContainer {
   grid-column: 1/5;
   display: grid;
@@ -651,6 +666,13 @@ main .yourBookings #expandBookings:active {
     font-size: 1.6vw;
     margin-top: 3vh;
     margin-left: 2vh;
+  }
+  main .calendarContainer #bookingSelector .closeButton {
+    margin-top: 2vw;
+    padding: 1vw;
+  }
+  main .calendarContainer #bookingSelector .closeButton img {
+    height: 2vw;
   }
   main .calendarContainer #bookingSelector .hourContainer {
     margin: 2vw;
