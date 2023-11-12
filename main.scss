@@ -250,7 +250,7 @@ main{
     }
 
     .calendarContainer{
-        width: 80vw;
+        width: 35vh;
         height: 35vh;
         background-color: $calendarBackground;
         border-radius: 2vh;
@@ -261,7 +261,7 @@ main{
             grid-template-columns: repeat(7, 1fr);
             grid-template-rows: repeat(7, 1fr);
             place-items: center;
-            width: 72vw;
+            width: 32vh;
             height: 32vh;
             .dayHeader{
                 width: 4vh;
@@ -575,3 +575,4 @@ main{
 }
 
 @import 'scss/media-querys-mobile-landscape.scss';
+@import 'scss/media-querys-desktop.scss';

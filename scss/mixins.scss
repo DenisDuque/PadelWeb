@@ -20,3 +20,35 @@
     filter: none;
     background-color: $confirmButtonDisabled;
 }
+
+@mixin datePickerHorizontal{
+    .datePicker{
+        margin-top: 1.5vh;
+        display: flex;
+        justify-content: space-between;
+        width: 34vw;
+        height: 4vw;
+
+        .changeMonth{
+            height: 4vw;
+            width: 4vw;
+        }
+
+        #prv{
+            order: 1;
+        }
+        #month{
+            font-size: 2.5vw;
+            order: 2;
+        }
+        #year{
+            font-size: 2vw;
+            order: 3;
+            align-self: center;
+            margin-top: 1.2vh;
+        }
+        #nxt{
+            order: 4;
+        }
+    }
+}

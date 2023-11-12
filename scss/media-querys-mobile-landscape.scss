@@ -1,3 +1,7 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
 @media screen and (max-width: 933px) and (orientation: landscape) {
     // Login styles
     body{
@@ -66,22 +70,23 @@
         width: 100vw;
         display: flex;
         padding: 0px;
-        justify-content: space-around;
-        margin-left: 5vw;
-        margin-right: 5vw;
+        justify-content: flex-start;
 
         img{
             height: 10svh;
             width: 10svh;
+            margin-left: 4vh;
         }
 
         h1{
             margin: 0px;
+            margin-left: 10vh;
             font-size: 3vw;
         }
 
         a{
-            justify-self: flex-end;
+            margin-left: auto;
+            margin-right: 4vh;
             img{
                 height: 8svh;
                 width: 8svh;
@@ -97,35 +102,7 @@
         grid-template-columns: repeat(2, 50vw);
         grid-template-rows: 10svh 70svh;
         
-        .datePicker{
-            margin-top: 1.5vh;
-            display: flex;
-            justify-content: space-between;
-            width: 34vw;
-            height: 4vw;
-
-            .changeMonth{
-                height: 4vw;
-                width: 4vw;
-            }
-
-            #prv{
-                order: 1;
-            }
-            #month{
-                font-size: 2.5vw;
-                order: 2;
-            }
-            #year{
-                font-size: 2vw;
-                order: 3;
-                align-self: center;
-                margin-top: 1.2vh;
-            }
-            #nxt{
-                order: 4;
-            }
-        }
+        @include datePickerHorizontal;
 
         .calendarContainer{
             width: 34vw;
