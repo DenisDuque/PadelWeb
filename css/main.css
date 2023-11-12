@@ -46,6 +46,7 @@ body {
   align-self: center;
   top: 22vh;
   border-radius: 2vh;
+  text-wrap: balance;
 }
 #cancelDiv strong {
   font-size: 1.5vh;
@@ -304,7 +305,7 @@ main .calendarContainer #calendar .fullBookings:active {
   background-color: #550000;
   filter: none;
 }
-main .calendarContainer .bookingSelector {
+main .calendarContainer #bookingSelector {
   width: 80vw;
   height: 35vh;
   background-color: rgb(0, 90, 91);
@@ -315,7 +316,7 @@ main .calendarContainer .bookingSelector {
   grid-template-rows: 10% 50% 40%;
   grid-template-columns: repeat(3, 1fr);
 }
-main .calendarContainer .bookingSelector p.date {
+main .calendarContainer #bookingSelector p.date {
   place-self: center;
   font-weight: bolder;
   grid-column: 1/3;
@@ -323,7 +324,22 @@ main .calendarContainer .bookingSelector p.date {
   margin-top: 1rem;
   margin-left: 1rem;
 }
-main .calendarContainer .bookingSelector .hourContainer {
+main .calendarContainer #bookingSelector .closeButton {
+  background-color: rgb(0, 90, 91);
+  border: none;
+  place-self: center;
+  margin-top: 2vh;
+  padding: 1vh;
+  border-radius: 50%;
+}
+main .calendarContainer #bookingSelector .closeButton img {
+  height: 2vh;
+  aspect-ratio: 1/1;
+}
+main .calendarContainer #bookingSelector .closeButton:active {
+  background-color: #0a3531;
+}
+main .calendarContainer #bookingSelector .hourContainer {
   grid-column: 1/5;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -333,7 +349,7 @@ main .calendarContainer .bookingSelector .hourContainer {
   grid-row-gap: 1vh;
   grid-column-gap: 1vh;
 }
-main .calendarContainer .bookingSelector .hourContainer .hour {
+main .calendarContainer #bookingSelector .hourContainer .hour {
   background-color: #008C81;
   width: 100%;
   height: 100%;
@@ -342,20 +358,20 @@ main .calendarContainer .bookingSelector .hourContainer .hour {
   place-items: center;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-main .calendarContainer .bookingSelector .hourContainer .myBooking {
+main .calendarContainer #bookingSelector .hourContainer .myBooking {
   background-color: #009BBD;
 }
-main .calendarContainer .bookingSelector .hourContainer .halfBooked {
+main .calendarContainer #bookingSelector .hourContainer .halfBooked {
   background-color: #FFD348;
 }
-main .calendarContainer .bookingSelector .hourContainer .fullBooked {
+main .calendarContainer #bookingSelector .hourContainer .fullBooked {
   background-color: #770000;
 }
-main .calendarContainer .bookingSelector .hourContainer .clicked {
+main .calendarContainer #bookingSelector .hourContainer .clicked {
   filter: none;
   box-shadow: inset 0 0 5px black;
 }
-main .calendarContainer .bookingSelector .confirmDiv {
+main .calendarContainer #bookingSelector .confirmDiv {
   grid-column: 1/3;
   background-color: #007369;
   place-self: left;
@@ -369,11 +385,11 @@ main .calendarContainer .bookingSelector .confirmDiv {
   justify-content: space-between;
   align-items: center;
 }
-main .calendarContainer .bookingSelector .confirmDiv p {
+main .calendarContainer #bookingSelector .confirmDiv p {
   text-align: center;
   margin-top: 0.5rem;
 }
-main .calendarContainer .bookingSelector .confirmDiv button {
+main .calendarContainer #bookingSelector .confirmDiv button {
   width: 80%;
   height: 2.5rem;
   margin-bottom: 1rem;
@@ -386,16 +402,16 @@ main .calendarContainer .bookingSelector .confirmDiv button {
   border: none;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-main .calendarContainer .bookingSelector .confirmDiv button:disabled {
+main .calendarContainer #bookingSelector .confirmDiv button:disabled {
   filter: none;
   background-color: #008059;
 }
-main .calendarContainer .bookingSelector .confirmDiv button:active {
+main .calendarContainer #bookingSelector .confirmDiv button:active {
   filter: none;
   background-color: #008059;
   transform: scale(95%);
 }
-main .calendarContainer .bookingSelector .infoDiv {
+main .calendarContainer #bookingSelector .infoDiv {
   grid-column: 3/5;
   display: flex;
   flex-direction: column;
@@ -403,21 +419,21 @@ main .calendarContainer .bookingSelector .infoDiv {
   margin-bottom: 1.8rem;
   font-size: 0.8rem;
 }
-main .calendarContainer .bookingSelector .infoDiv .halfBooked::before {
+main .calendarContainer #bookingSelector .infoDiv .halfBooked::before {
   content: "●";
   color: #FFD348;
   margin-right: 2px;
   margin-top: 2px;
   font-size: 1.2rem;
 }
-main .calendarContainer .bookingSelector .infoDiv .fullBooked::before {
+main .calendarContainer #bookingSelector .infoDiv .fullBooked::before {
   content: "●";
   color: #770000;
   margin-right: 2px;
   margin-top: 2px;
   font-size: 1.2rem;
 }
-main .calendarContainer .bookingSelector .infoDiv .yourBooking::before {
+main .calendarContainer #bookingSelector .infoDiv .yourBooking::before {
   content: "●";
   color: #009BBD;
   margin-right: 2px;
@@ -510,4 +526,201 @@ main .yourBookings #expandBookings img {
 }
 main .yourBookings #expandBookings:active {
   background-color: #002c33;
+}
+
+@media screen and (max-width: 933px) and (orientation: landscape) {
+  body {
+    width: 100vw;
+    min-height: calc(100svh - env(safe-area-inset-bottom));
+    height: calc(100svh - env(safe-area-inset-bottom));
+    justify-content: center;
+    align-items: center;
+  }
+  body #loginDiv {
+    display: flex;
+    flex-direction: row;
+  }
+  body #loginDiv .logo {
+    margin: 0px;
+    width: 40%;
+    height: 30vw;
+  }
+  body #loginDiv form {
+    margin: 0px;
+    margin-bottom: 5vh;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  body #loginDiv form div {
+    width: 90%;
+    height: 12vh;
+    margin: 2vh;
+  }
+  body #loginDiv form div .imageContainer {
+    height: 9.5vh;
+    width: 9.5vh;
+    margin-top: 2.6vh;
+  }
+  body #loginDiv form div .imageContainer img {
+    height: 7vh;
+  }
+  body #loginDiv form div .loginInput {
+    width: 100%;
+    height: 12vh;
+    font-size: 6vh;
+    border-radius: 11vh;
+  }
+  body #loginDiv form .errorLogin {
+    font-size: 6vh;
+    margin-top: 5vh;
+  }
+  body #loginDiv form #loginButton {
+    width: 85%;
+    height: 12vh;
+    font-size: 6vh;
+    border-radius: 11vh;
+  }
+  header {
+    height: 15svh;
+    width: 100vw;
+    display: flex;
+    padding: 0px;
+    justify-content: space-around;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+  header img {
+    height: 10svh;
+    width: 10svh;
+  }
+  header h1 {
+    margin: 0px;
+    font-size: 3vw;
+  }
+  header a {
+    justify-self: flex-end;
+  }
+  header a img {
+    height: 8svh;
+    width: 8svh;
+  }
+  main {
+    height: 85svh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, 50vw);
+    grid-template-rows: 10svh 70svh;
+  }
+  main .datePicker {
+    margin-top: 1.5vh;
+    display: flex;
+    justify-content: space-between;
+    width: 34vw;
+    height: 4vw;
+  }
+  main .datePicker .changeMonth {
+    height: 4vw;
+    width: 4vw;
+  }
+  main .datePicker #prv {
+    order: 1;
+  }
+  main .datePicker #month {
+    font-size: 2.5vw;
+    order: 2;
+  }
+  main .datePicker #year {
+    font-size: 2vw;
+    order: 3;
+    align-self: center;
+    margin-top: 1.2vh;
+  }
+  main .datePicker #nxt {
+    order: 4;
+  }
+  main .calendarContainer {
+    width: 34vw;
+    height: 26vw;
+    margin-top: 3vh;
+  }
+  main .calendarContainer #calendar {
+    width: 26vw;
+    height: 26vw;
+  }
+  main .calendarContainer #calendar .dayHeader p {
+    font-size: 1.5vw;
+  }
+  main .calendarContainer #calendar .dayHeader, main .calendarContainer #calendar .day {
+    height: 75%;
+    width: 75%;
+    font-size: auto;
+  }
+  main .calendarContainer #bookingSelector {
+    width: 34vw;
+    height: 26vw;
+  }
+  main .calendarContainer #bookingSelector p.date {
+    font-size: 1.6vw;
+    margin-top: 3vh;
+    margin-left: 2vh;
+  }
+  main .calendarContainer #bookingSelector .closeButton {
+    margin-top: 2vw;
+    padding: 1vw;
+  }
+  main .calendarContainer #bookingSelector .closeButton img {
+    height: 2vw;
+  }
+  main .calendarContainer #bookingSelector .hourContainer {
+    margin: 2vw;
+  }
+  main .calendarContainer #bookingSelector .hourContainer .hour {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv p {
+    font-size: 0.8rem;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv button {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .infoDiv {
+    justify-content: center;
+  }
+  main .calendarContainer #bookingSelector .infoDiv p {
+    font-size: 0.5rem;
+  }
+  main .yourBookings {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+    margin: 0px;
+    height: 100%;
+    margin-top: 1.5vw;
+  }
+  main .yourBookings h2 {
+    font-size: 2vw;
+  }
+  main .yourBookings #bookingContainer {
+    max-height: 85vh;
+  }
+  main .yourBookings #bookingContainer .booking p {
+    font-size: 1vw;
+  }
+  main .yourBookings #bookingContainer .booking p strong {
+    font-size: 1.5vw;
+  }
+  #cancelDiv {
+    min-height: 60vh;
+    max-height: 60vh;
+    margin-bottom: 5vh;
+  }
+  #cancelDiv p strong {
+    font-size: 2vw;
+  }
 }/*# sourceMappingURL=main.css.map */

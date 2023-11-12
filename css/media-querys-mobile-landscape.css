@@ -1,0 +1,196 @@
+@media screen and (max-width: 933px) and (orientation: landscape) {
+  body {
+    width: 100vw;
+    min-height: calc(100svh - env(safe-area-inset-bottom));
+    height: calc(100svh - env(safe-area-inset-bottom));
+    justify-content: center;
+    align-items: center;
+  }
+  body #loginDiv {
+    display: flex;
+    flex-direction: row;
+  }
+  body #loginDiv .logo {
+    margin: 0px;
+    width: 40%;
+    height: 30vw;
+  }
+  body #loginDiv form {
+    margin: 0px;
+    margin-bottom: 5vh;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  body #loginDiv form div {
+    width: 90%;
+    height: 12vh;
+    margin: 2vh;
+  }
+  body #loginDiv form div .imageContainer {
+    height: 9.5vh;
+    width: 9.5vh;
+    margin-top: 2.6vh;
+  }
+  body #loginDiv form div .imageContainer img {
+    height: 7vh;
+  }
+  body #loginDiv form div .loginInput {
+    width: 100%;
+    height: 12vh;
+    font-size: 6vh;
+    border-radius: 11vh;
+  }
+  body #loginDiv form .errorLogin {
+    font-size: 6vh;
+    margin-top: 5vh;
+  }
+  body #loginDiv form #loginButton {
+    width: 85%;
+    height: 12vh;
+    font-size: 6vh;
+    border-radius: 11vh;
+  }
+  header {
+    height: 15svh;
+    width: 100vw;
+    display: flex;
+    padding: 0px;
+    justify-content: space-around;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+  header img {
+    height: 10svh;
+    width: 10svh;
+  }
+  header h1 {
+    margin: 0px;
+    font-size: 3vw;
+  }
+  header a {
+    justify-self: flex-end;
+  }
+  header a img {
+    height: 8svh;
+    width: 8svh;
+  }
+  main {
+    height: 85svh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2, 50vw);
+    grid-template-rows: 10svh 70svh;
+  }
+  main .datePicker {
+    margin-top: 1.5vh;
+    display: flex;
+    justify-content: space-between;
+    width: 34vw;
+    height: 4vw;
+  }
+  main .datePicker .changeMonth {
+    height: 4vw;
+    width: 4vw;
+  }
+  main .datePicker #prv {
+    order: 1;
+  }
+  main .datePicker #month {
+    font-size: 2.5vw;
+    order: 2;
+  }
+  main .datePicker #year {
+    font-size: 2vw;
+    order: 3;
+    align-self: center;
+    margin-top: 1.2vh;
+  }
+  main .datePicker #nxt {
+    order: 4;
+  }
+  main .calendarContainer {
+    width: 34vw;
+    height: 26vw;
+    margin-top: 3vh;
+  }
+  main .calendarContainer #calendar {
+    width: 26vw;
+    height: 26vw;
+  }
+  main .calendarContainer #calendar .dayHeader p {
+    font-size: 1.5vw;
+  }
+  main .calendarContainer #calendar .dayHeader, main .calendarContainer #calendar .day {
+    height: 75%;
+    width: 75%;
+    font-size: auto;
+  }
+  main .calendarContainer #bookingSelector {
+    width: 34vw;
+    height: 26vw;
+  }
+  main .calendarContainer #bookingSelector p.date {
+    font-size: 1.6vw;
+    margin-top: 3vh;
+    margin-left: 2vh;
+  }
+  main .calendarContainer #bookingSelector .closeButton {
+    margin-top: 2vw;
+    padding: 1vw;
+  }
+  main .calendarContainer #bookingSelector .closeButton img {
+    height: 2vw;
+  }
+  main .calendarContainer #bookingSelector .hourContainer {
+    margin: 2vw;
+  }
+  main .calendarContainer #bookingSelector .hourContainer .hour {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv p {
+    font-size: 0.8rem;
+  }
+  main .calendarContainer #bookingSelector .confirmDiv button {
+    border-radius: 1vw;
+  }
+  main .calendarContainer #bookingSelector .infoDiv {
+    justify-content: center;
+  }
+  main .calendarContainer #bookingSelector .infoDiv p {
+    font-size: 0.5rem;
+  }
+  main .yourBookings {
+    grid-column: 2/3;
+    grid-row: 1/3;
+    width: 100%;
+    margin: 0px;
+    height: 100%;
+    margin-top: 1.5vw;
+  }
+  main .yourBookings h2 {
+    font-size: 2vw;
+  }
+  main .yourBookings #bookingContainer {
+    max-height: 85vh;
+  }
+  main .yourBookings #bookingContainer .booking p {
+    font-size: 1vw;
+  }
+  main .yourBookings #bookingContainer .booking p strong {
+    font-size: 1.5vw;
+  }
+  #cancelDiv {
+    min-height: 60vh;
+    max-height: 60vh;
+    margin-bottom: 5vh;
+  }
+  #cancelDiv p strong {
+    font-size: 2vw;
+  }
+}/*# sourceMappingURL=media-querys-mobile-landscape.css.map */
