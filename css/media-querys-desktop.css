@@ -1,90 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
-@media screen and (max-width: 933px) and (orientation: landscape) {
-  body {
-    width: 100vw;
-    min-height: calc(100svh - env(safe-area-inset-bottom));
-    height: calc(100svh - env(safe-area-inset-bottom));
-    justify-content: center;
-    align-items: center;
-  }
-  body #loginDiv {
-    display: flex;
-    flex-direction: row;
-  }
-  body #loginDiv .logo {
-    margin: 0px;
-    width: 40%;
-    height: 30vw;
-  }
-  body #loginDiv form {
-    margin: 0px;
-    margin-bottom: 5vh;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  body #loginDiv form div {
-    width: 90%;
-    height: 12vh;
-    margin: 2vh;
-  }
-  body #loginDiv form div .imageContainer {
-    height: 9.5vh;
-    width: 9.5vh;
-    margin-top: 2.6vh;
-  }
-  body #loginDiv form div .imageContainer img {
-    height: 7vh;
-  }
-  body #loginDiv form div .loginInput {
-    width: 100%;
-    height: 12vh;
-    font-size: 6vh;
-    border-radius: 11vh;
-  }
-  body #loginDiv form .errorLogin {
-    font-size: 6vh;
-    margin-top: 5vh;
-  }
-  body #loginDiv form #loginButton {
-    width: 85%;
-    height: 12vh;
-    font-size: 6vh;
-    border-radius: 11vh;
-  }
+@media screen and (min-width: 1000px) {
   header {
-    height: 15svh;
-    width: 100vw;
-    display: flex;
-    padding: 0px;
     justify-content: flex-start;
   }
   header img {
-    height: 10svh;
-    width: 10svh;
-    margin-left: 4vh;
+    height: 5vw;
+    width: 5vw;
+    margin-left: 2vw;
   }
   header h1 {
-    margin: 0px;
-    margin-left: 10vh;
     font-size: 3vw;
+    margin-left: 2vw;
   }
   header a {
     margin-left: auto;
-    margin-right: 4vh;
+    margin-right: 2vw;
   }
   header a img {
-    height: 8svh;
-    width: 8svh;
-  }
-  main {
-    height: 85svh;
-    width: 100vw;
-    display: grid;
-    place-items: center;
-    grid-template-columns: repeat(2, 50vw);
-    grid-template-rows: 10svh 70svh;
+    height: 4vw;
+    width: 4vw;
   }
   main .datePicker {
     margin-top: 1.5vh;
@@ -113,14 +47,48 @@
   main .datePicker #nxt {
     order: 4;
   }
+  main .datePicker #year {
+    margin-top: 0.5vh;
+  }
   main .calendarContainer {
-    width: 34vw;
-    height: 26vw;
-    margin-top: 3vh;
+    width: 30vw;
+    height: 30vw;
   }
   main .calendarContainer #calendar {
-    width: 26vw;
-    height: 26vw;
+    width: 28vw;
+    height: 28vw;
+  }
+  main .calendarContainer #bookingSelector {
+    width: 30vw;
+    height: 30vw;
+  }
+  main .yourBookings #bookingContainer {
+    max-height: 35vh;
+  }
+}
+@media screen and (min-width: 1250px) {
+  body {
+    overflow-y: hidden;
+  }
+  header {
+    height: 15vh;
+    padding: 0px;
+  }
+  main {
+    display: grid;
+    grid-template-columns: repeat(2, 50vw);
+    grid-template-rows: 15svh 70svh;
+    place-items: center;
+  }
+  main .calendarContainer {
+    width: 30vw;
+    height: 30vw;
+    place-self: baseline;
+    justify-self: center;
+  }
+  main .calendarContainer #calendar {
+    width: 28vw;
+    height: 28vw;
   }
   main .calendarContainer #calendar .dayHeader p {
     font-size: 1.5vw;
@@ -173,7 +141,7 @@
     width: 100%;
     margin: 0px;
     height: 100%;
-    margin-top: 1.5vw;
+    margin-top: 5.5vw;
   }
   main .yourBookings h2 {
     font-size: 2vw;
@@ -187,12 +155,4 @@
   main .yourBookings #bookingContainer .booking p strong {
     font-size: 1.5vw;
   }
-  #cancelDiv {
-    min-height: 60vh;
-    max-height: 60vh;
-    margin-bottom: 5vh;
-  }
-  #cancelDiv p strong {
-    font-size: 2vw;
-  }
-}/*# sourceMappingURL=media-querys-mobile-landscape.css.map */
+}/*# sourceMappingURL=media-querys-desktop.css.map */

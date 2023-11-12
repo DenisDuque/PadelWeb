@@ -1,0 +1,167 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+@media screen and (min-width: 1000px) {
+    header{
+        justify-content: flex-start;
+
+        img{
+            height: 5vw;
+            width: 5vw;
+            margin-left: 2vw;
+        }
+
+        h1{
+            font-size: 3vw;
+            margin-left: 2vw;
+        }
+
+        a{
+            margin-left: auto;
+            margin-right: 2vw;
+        }
+
+        a img{
+            height: 4vw;
+            width: 4vw
+        }
+
+    }
+    main{
+        @include datePickerHorizontal;
+        .datePicker{
+            #year{
+                margin-top: 0.5vh;
+            }
+        }
+
+        .calendarContainer{
+            width: 30vw;
+            height: 30vw;
+
+            #calendar{
+                width: 28vw;
+                height: 28vw;
+            }
+
+            #bookingSelector{
+                width: 30vw;
+                height: 30vw;
+            }
+        }
+
+        .yourBookings{
+            #bookingContainer{
+            max-height: 35vh;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1250px) {
+    body{
+        overflow-y: hidden;
+    }
+    header{
+        height: 15vh;
+        padding: 0px;
+    }
+    main{
+        display: grid;
+        grid-template-columns: repeat(2, 50vw);
+        grid-template-rows: 15svh 70svh;
+        place-items: center;
+
+        .calendarContainer{
+            width: 30vw;
+            height: 30vw;
+            place-self: baseline;
+            justify-self: center;
+
+            #calendar{
+                width: 28vw;
+                height: 28vw;
+                .dayHeader{
+                    p{
+                        font-size: 1.5vw;
+                    }
+                }
+                .dayHeader, .day{
+                    height: 75%;
+                    width: 75%;
+                    font-size: auto;
+                }
+            }
+
+            #bookingSelector{
+                width: 34vw;
+                height: 26vw;
+
+                p.date{
+                    font-size: 1.6vw;
+                    margin-top: 3vh;
+                    margin-left: 2vh;
+                }
+
+                .closeButton{
+                    margin-top: 2vw;
+                    padding: 1vw;
+
+                    img{
+                        height: 2vw;
+                    }
+                }
+
+                .hourContainer{
+                    margin: 2vw;
+                    .hour{
+                        border-radius: 1vw;
+                    }
+                }
+
+                .confirmDiv{
+                    border-radius: 1vw;
+                    p{
+                        font-size: 0.8rem;
+                    }
+                    button{
+                        border-radius: 1vw;
+                    }
+                }
+
+                .infoDiv{
+                    justify-content: center;
+                    p{
+                        font-size: 0.5rem;
+                    }
+                }
+            }
+        }
+        
+        .yourBookings{
+            grid-column: 2/3;
+            grid-row: 1/3;
+            width: 100%;
+            margin: 0px;
+            height: 100%;
+            margin-top: 5.5vw;
+            h2{
+                font-size: 2vw;
+            }
+
+            #bookingContainer{
+                max-height: 85vh;
+                .booking{
+                    p{
+                        font-size: 1vw;
+                        strong{
+                            font-size: 1.5vw;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
