@@ -286,6 +286,9 @@ main .calendarContainer #calendar .day:active {
   background-color: #0a3531;
   filter: none;
 }
+main .calendarContainer #calendar .unavailableDay {
+  background-color: #005f57;
+}
 main .calendarContainer #calendar .myBooking {
   background-color: #009BBD;
 }
@@ -317,6 +320,12 @@ main .calendarContainer #bookingSelector {
   display: grid;
   grid-template-rows: 10% 50% 40%;
   grid-template-columns: repeat(3, 1fr);
+}
+main .calendarContainer #bookingSelector .errorMessage {
+  grid-column: 1/4;
+  place-self: center;
+  text-wrap: balance;
+  text-align: center;
 }
 main .calendarContainer #bookingSelector p.date {
   place-self: center;

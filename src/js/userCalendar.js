@@ -27,6 +27,8 @@ const hoursAvailable = [
 let currentDate = new Date();
 let currentMonth = currentDate.getMonth();
 let currentYear = currentDate.getFullYear();
+let limitDate = new Date();
+limitDate.setDate(limitDate.getDate() + 14);
 
 function setupCalendar(){
     // Obtiene elementos de la interfaz de usuario.
@@ -74,6 +76,7 @@ function setupCalendar(){
             let emptyDiv = document.createElement("div");
             calendar.appendChild(emptyDiv);
             emptyDiv.classList.add("day");
+            emptyDiv.classList.add("unavailableDay");
 
             daysIterated++;
         }
@@ -93,7 +96,6 @@ function setupCalendar(){
             let userHasBooking = false;
             let courtsNum;
             
-
             for (let j = 0; j < bookingsForMonth.length; j++) {
                 const book = bookingsForMonth[j];
                 if(book.day.split('-')[2]==i+1){
@@ -123,122 +125,128 @@ function setupCalendar(){
                     dayDiv.classList.add("highInflux")
                 }
             }
+            let numberDay = dayNumber.innerHTML;
+            let date = (currentYear+"-"+(currentMonth+1)+"-"+numberDay);
+            let compare = new Date(date);
+            
+            if(compare<currentDate){
+                dayDiv.className = "";
+                dayDiv.classList.add("day");
+                dayDiv.classList.add("unavailableDay");
+            } else if(compare>limitDate){
+                dayDiv.className = "";
+                dayDiv.classList.add("day");
+                dayDiv.classList.add("unavailableDay");
+            } else{
+                // Se añade un evento on click al dia
+                dayDiv.addEventListener("click", function() {
+                    // Filtra las resevas para el dia en el que se clica
+                    let bookingsForDay = bookingsForMonth.filter(booking => booking.day == date);
 
-            // Se añade un evento on click al dia
-            dayDiv.addEventListener("click", function() {
-                let numberDay = dayNumber.innerHTML;
-                if(numberDay.length===1) numberDay = "0"+numberDay;
-
-                let date = (currentYear+"-"+(currentMonth+1)+"-"+numberDay);
-
-                // Filtra las resevas para el dia en el que se clica
-                let bookingsForDay = bookingsForMonth.filter(booking => booking.day == date);
-
-                console.log(bookingsForDay);
-                
-                // Crea el div
-                let bookingSelector = document.createElement("div");
-                bookingSelector.id = "bookingSelector";
-
-                // Consigue el dia en el que clica
-                let nameDay = weekdaysName[new Date(date).getDay()];
-                let numberDayP = document.createElement("p");
-                numberDayP.innerHTML = nameDay;
-                numberDayP.innerHTML += " " + dayNumber.innerHTML + "  " + monthsName[currentMonth];
-                numberDayP.classList.add("date")
-                bookingSelector.appendChild(numberDayP);
-
-                let closeButton = document.createElement("button");
-                let closeButtonImg = document.createElement("img");
-                closeButtonImg.alt = "close booking selector";
-                closeButtonImg.src = "src/img/cross.png";
-                closeButton.appendChild(closeButtonImg);
-                closeButton.classList.add("closeButton");
-
-                closeButton.addEventListener("click", function() {
-                    closeButtonEvent();
-                });
-
-                bookingSelector.appendChild(closeButton);
-
-                let hourContainer = document.createElement("div");
-                hourContainer.classList.add("hourContainer");
-                
-                hoursAvailable.forEach(hour => {
-                    let bookingsForHour = bookingsForDay.filter(booking => booking.hour == hour);
-                    let userHasBooking = false;
-                    let otherBookings = 0;
-                    let courtsNum = -1;
-                    if(bookingsForHour.length>0) {
-                        courtsNum++;
-                        bookingsForHour.forEach(booking => {
-                            if(booking.email === booking.current) userHasBooking = true;
-                            else otherBookings+=1;
-                            courtsNum = booking.numCourts;
-                        });
-                    }
-
+                    console.log(bookingsForDay);
                     
+                    // Crea el div
+                    let bookingSelector = document.createElement("div");
+                    bookingSelector.id = "bookingSelector";
 
-                    let hourDiv = document.createElement("div");
-                    hourDiv.classList.add("hour");
-                    hourDiv.id = hour;
+                    // Consigue el dia en el que clica
+                    let nameDay = weekdaysName[new Date(date).getDay()];
+                    let numberDayP = document.createElement("p");
+                    numberDayP.innerHTML = nameDay;
+                    numberDayP.innerHTML += " " + dayNumber.innerHTML + "  " + monthsName[currentMonth];
+                    numberDayP.classList.add("date")
+                    bookingSelector.appendChild(numberDayP);
 
-                    if(userHasBooking) hourDiv.classList.add("myBooking");
-                    else if(otherBookings == courtsNum) hourDiv.classList.add("fullBooked");
-                    else if(otherBookings < courtsNum && otherBookings >= (courtsNum/2)) hourDiv.classList.add("halfBooked");
+                    let closeButton = document.createElement("button");
+                    let closeButtonImg = document.createElement("img");
+                    closeButtonImg.alt = "close booking selector";
+                    closeButtonImg.src = "src/img/cross.png";
+                    closeButton.appendChild(closeButtonImg);
+                    closeButton.classList.add("closeButton");
 
-                    let hourDisplay = document.createElement("p");
-                    hourDisplay.innerHTML = hour.startsWith("0") ? hour.substring(1) : hour;
-                    hourDiv.appendChild(hourDisplay);
+                    closeButton.addEventListener("click", function() {
+                        closeButtonEvent();
+                    });
 
-                    if(!userHasBooking && otherBookings != courtsNum){
-                        hourDiv.addEventListener("click", function() {
-                            hourEvent(hour, date);
-                        })
-                    }
+                    bookingSelector.appendChild(closeButton);
 
-                    hourContainer.appendChild(hourDiv);
+                    let hourContainer = document.createElement("div");
+                    hourContainer.classList.add("hourContainer");
+                    
+                    hoursAvailable.forEach(hour => {
+                        let bookingsForHour = bookingsForDay.filter(booking => booking.hour == hour);
+                        let userHasBooking = false;
+                        let otherBookings = 0;
+                        let courtsNum = -1;
+                        if(bookingsForHour.length>0) {
+                            courtsNum++;
+                            bookingsForHour.forEach(booking => {
+                                if(booking.email === booking.current) userHasBooking = true;
+                                else otherBookings+=1;
+                                courtsNum = booking.numCourts;
+                            });
+                        }
+
+                        let hourDiv = document.createElement("div");
+                        hourDiv.classList.add("hour");
+                        hourDiv.id = hour;
+
+                        if(userHasBooking) hourDiv.classList.add("myBooking");
+                        else if(otherBookings == courtsNum) hourDiv.classList.add("fullBooked");
+                        else if(otherBookings < courtsNum && otherBookings >= (courtsNum/2)) hourDiv.classList.add("halfBooked");
+
+                        let hourDisplay = document.createElement("p");
+                        hourDisplay.innerHTML = hour.startsWith("0") ? hour.substring(1) : hour;
+                        hourDiv.appendChild(hourDisplay);
+
+                        if(!userHasBooking && otherBookings != courtsNum){
+                            hourDiv.addEventListener("click", function() {
+                                hourEvent(hour, date);
+                            })
+                        }
+
+                        hourContainer.appendChild(hourDiv);
+                    });
+                    bookingSelector.appendChild(hourContainer);
+
+                    let confirmDiv = document.createElement("div");
+                    confirmDiv.classList.add("confirmDiv");
+                    let bookAtP = document.createElement("p")
+                    bookAtP.innerHTML = "Select a hour to book";
+                    confirmDiv.appendChild(bookAtP);
+                    let confirmButton = document.createElement("button");
+                    confirmButton.innerHTML = "Confirm";
+                    confirmButton.id = "confirmB";
+                    confirmButton.disabled = true;
+                    confirmButton.addEventListener("click", function() {
+                        bookCourt();
+                    })
+                    confirmDiv.appendChild(confirmButton);
+                    bookingSelector.appendChild(confirmDiv);
+
+                    let infoDiv = document.createElement("div");
+                    infoDiv.classList.add("infoDiv");
+
+                    let halfBooked = document.createElement("p");
+                    halfBooked.classList.add("halfBooked");
+                    halfBooked.innerText = "50% booked";
+                    let fullBooked = document.createElement("p");
+                    fullBooked.classList.add("fullBooked");
+                    fullBooked.innerText = "All booked";
+                    let yourBooking = document.createElement("p");
+                    yourBooking.classList.add("yourBooking");
+                    yourBooking.innerText = "Your booking";
+
+                    infoDiv.appendChild(halfBooked);
+                    infoDiv.appendChild(fullBooked);
+                    infoDiv.appendChild(yourBooking);
+
+                    bookingSelector.appendChild(infoDiv);
+                    
+                    calendar.parentElement.appendChild(bookingSelector);
                 });
-                bookingSelector.appendChild(hourContainer);
-
-                let confirmDiv = document.createElement("div");
-                confirmDiv.classList.add("confirmDiv");
-                let bookAtP = document.createElement("p")
-                bookAtP.innerHTML = "Select a hour to book";
-                confirmDiv.appendChild(bookAtP);
-                let confirmButton = document.createElement("button");
-                confirmButton.innerHTML = "Confirm";
-                confirmButton.id = "confirmB";
-                confirmButton.disabled = true;
-                confirmButton.addEventListener("click", function() {
-                    bookCourt();
-                })
-                confirmDiv.appendChild(confirmButton);
-                bookingSelector.appendChild(confirmDiv);
-
-                let infoDiv = document.createElement("div");
-                infoDiv.classList.add("infoDiv");
-
-                let halfBooked = document.createElement("p");
-                halfBooked.classList.add("halfBooked");
-                halfBooked.innerText = "50% booked";
-                let fullBooked = document.createElement("p");
-                fullBooked.classList.add("fullBooked");
-                fullBooked.innerText = "All booked";
-                let yourBooking = document.createElement("p");
-                yourBooking.classList.add("yourBooking");
-                yourBooking.innerText = "Your booking";
-
-                infoDiv.appendChild(halfBooked);
-                infoDiv.appendChild(fullBooked);
-                infoDiv.appendChild(yourBooking);
-
-                bookingSelector.appendChild(infoDiv);
-                
-                calendar.parentElement.appendChild(bookingSelector);
-            });
-
+            }
+            
             calendar.appendChild(dayDiv);
 
             daysIterated++;
@@ -248,6 +256,7 @@ function setupCalendar(){
             let emptyDiv = document.createElement("div");
             calendar.appendChild(emptyDiv);
             emptyDiv.classList.add("day");
+            emptyDiv.classList.add("unavailableDay");
 
             daysIterated++;
         }
