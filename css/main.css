@@ -165,18 +165,24 @@ body {
   text-align: center;
   width: 60vw;
 }
-#loginDiv #loginButton {
+#loginDiv .loginButton {
   margin: 2vh;
-  margin-top: 10vh;
+  margin-top: 2vh;
   font: "Inter", sans-serif;
   font-weight: bold;
   color: #005A5B;
   border-radius: 3vh;
-  display: block;
+  background-color: white;
+  display: grid;
+  place-items: center;
   width: 60vw;
   height: 6vh;
   font-size: 2vh;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+#loginDiv .loginButton:link, #loginDiv .loginButton:visited #loginDiv .loginButton:active {
+  text-decoration: none;
+  color: #005A5B;
 }
 
 header {
@@ -539,6 +545,29 @@ main .yourBookings #expandBookings:active {
   background-color: #002c33;
 }
 
+.fadePopUp {
+  position: absolute;
+  top: 20%;
+  padding: 1rem;
+  background-color: #009c60;
+  border-radius: 1em;
+  animation: popupfade 1.5s ease;
+  opacity: 0;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.fadePopUp p {
+  color: white;
+  font-size: 1.5rem;
+}
+
+@keyframes popupfade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @media screen and (max-width: 933px) and (orientation: landscape) {
   body {
     width: 100vw;

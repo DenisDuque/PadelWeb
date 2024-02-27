@@ -26,7 +26,11 @@
             if(connectDataBase()==false){
                 echo "<h1 style='color: white; margin-top: 1rem;'>Database down</h1>";
             } else {
-
+                if(isset($_GET['register'])){
+                    echo "
+                        <div class='fadePopUp'><p>User added correctly</p></div>
+                    ";
+                }
             
         ?>
         <form action="index.php" method="post" enctype="multipart/form-data" name="login" autocomplete="off">
@@ -45,7 +49,8 @@
                     echo "<p class='errorLogin'>$incorrectCredentials</p>";
                 }
             ?>
-            <input type="submit" id="loginButton" value="LOGIN">
+            <input type="submit" class="loginButton" value="LOGIN">
+            <a class="loginButton" href="register.php">REGISTER</a>
         </form>
         <?php
             }
