@@ -12,7 +12,6 @@
         if(!empty($_POST)){
             $connect = connectDataBase();
             $password = md5($_POST['userPassword']);
-
             $insertSQL = "INSERT INTO user (email, password, isActive, isAdmin) VALUES ('" . $_POST['userEmail'] . "', '" . $password . "', 1, 0);";
             updateSQL($connect, $insertSQL);
             echo '<meta http-equiv="refresh" content="0;url=index.php?register">';
