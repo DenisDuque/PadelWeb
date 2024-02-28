@@ -13,9 +13,13 @@
             $connect = connectDataBase();
             $password = md5($_POST['userPassword']);
             $insertSQL = "INSERT INTO user (email, password, isActive, isAdmin) VALUES ('" . $_POST['userEmail'] . "', '" . $password . "', 1, 0);";
-            updateSQL($connect, $insertSQL);
-            echo '<meta http-equiv="refresh" content="0;url=index.php?register">';
-        } else {
+            try{
+                updateSQL($connect, $insertSQL);
+                echo '<meta http-equiv="refresh" content="0;url=index.php?register">';
+            } catch (Exception $error) {
+                echo "<div class='fadePopUp'><p>Error adding user</p></div>";
+            }
+        }
     ?>
     <div id="background"></div>
     <header style="justify-contne">
@@ -37,8 +41,5 @@
             <input type="submit" class="loginButton" value="REGISTER">
         </form>
     </div>
-    <?php
-        }
-    ?>
 </body>
 </html>

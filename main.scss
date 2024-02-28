@@ -599,6 +599,7 @@ main{
     border-radius: 1em;
     animation: popupfade 1.5s ease;
     opacity: 0;
+    z-index: 100;
     p{
         color: white;
         font-size: 1.5rem;
